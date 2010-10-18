@@ -82,3 +82,6 @@
   Contenido: Platillo1-Valor, Platillo2-Valor,…, Platillo8-Valor, Platillo9-Valor
 
   Se envía al administrador para que decida que platillo irá al menú.
+
+
+El contenido de los mensajes se separá por un gato (#) para poder aplicar split y facilitar el cast.
