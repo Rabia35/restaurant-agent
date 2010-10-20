@@ -15,10 +15,19 @@ public class AgenteCreador extends Agent
 		ContainerController c = getContainerController();
 		try {
 			AgentController a = c.createNewAgent("AgenteAdministrador", "agentes.AgenteAdministrador", null);
+			AgentController p = c.createNewAgent("AgenteProveedor", "agentes.AgenteProveedor", null);
+			AgentController b1 = c.createNewAgent("AgenteBodego1", "agentes.AgenteBodego",null);
+			AgentController b2 = c.createNewAgent("AgenteBodego2", "agentes.AgenteBodegoFuerte",null);
+			AgentController b3 = c.createNewAgent("AgenteBodego3", "agentes.AgenteBodegoAlto",null);
 			a.start();
+			p.start();
+			b1.start();
+			b2.start();
+			b3.start();
 		} catch (StaleProxyException e) {
 			e.printStackTrace();
 		}
+		
 		doDelete();
 	}
 }

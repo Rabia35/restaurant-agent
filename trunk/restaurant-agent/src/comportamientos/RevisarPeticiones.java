@@ -18,7 +18,6 @@ public class RevisarPeticiones extends CyclicBehaviour {
 	}
 
 	private static final long serialVersionUID = -8423084959540874770L;
-
 	@Override
 	public void action() {
 		if(miAgente.ingredientePorAcomodar==null){
