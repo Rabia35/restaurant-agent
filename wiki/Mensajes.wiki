@@ -32,9 +32,11 @@
 3.Rechazar
   * A los bodegos
 
-  Contenido vacío
+  ~~Contenido vacío~~
 
-  Se envía a todos los agentes que confirmaron y que no serán contratados.
+  ~~Se envía a todos los agentes que confirmaron y que no serán contratados.~~
+
+  No se  envía mensaje, los bodegos deben intuir que si no les contestan es porque fueron rechazados
 
 ==Proveedor==
 
@@ -55,9 +57,11 @@
 3.Rechazar
   * A los bodegos
 
-  Contenido vacío
+  ~~Contenido vacío~~
 
-  Se envía a todos los agentes que confirmaron y que no serán contratados.
+  ~~Se envía a todos los agentes que confirmaron y que no serán contratados.~~
+  
+  No se  envía mensaje, los bodegos deben intuir que si no les contestan es porque fueron rechazados
 
 ==Administrador==
 
