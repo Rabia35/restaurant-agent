@@ -18,7 +18,7 @@ public class ContratarBodego extends MsgReceiver{
 		super(a,MessageTemplate.MatchPerformative(Performativas.CONFIRMAR),deadline,null,null);
 		miAgente=a;
 	}
-	
+
 	protected void handleMessage(ACLMessage msg) {
 		if(msg==null){
 			Mensaje.mandaMensaje(miAgente, Performativas.INFORMAR, miAgente.agentesBodegos, miAgente.ingredientePorAcomodar.clave);
