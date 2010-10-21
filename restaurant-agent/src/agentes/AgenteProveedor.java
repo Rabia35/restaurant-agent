@@ -1,7 +1,6 @@
 package agentes;
 
 import comportamientos.BuscaAgentesParaProveedor;
-import comportamientos.RevisarPeticiones;
 
 import sql.Ingrediente;
 import util.AdministradorDF;
@@ -16,8 +15,7 @@ public class AgenteProveedor extends Agent {
 	
 	
 	protected void setup(){
-		addBehaviour(new BuscaAgentesParaProveedor(this));
-		addBehaviour(new RevisarPeticiones(this));
+		addBehaviour(new BuscaAgentesParaProveedor(this));		
 		AdministradorDF.daDeAlta(this, "AgenteProveedor", "AgenteProveedor");	
 		agentesBodegos= null;
 		System.out.println("Proveedor creado.");

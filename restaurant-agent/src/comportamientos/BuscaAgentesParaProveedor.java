@@ -22,5 +22,6 @@ public class BuscaAgentesParaProveedor extends WakerBehaviour{
 		super.onWake();
 		miAgente.agentesBodegos = AdministradorDF.encuentraAgentes(miAgente, "AgenteBodego");
 		System.out.println("Agentes Bodegos agregados para Proveedor"); //DEBUG
+		miAgente.addBehaviour(new RevisarPeticiones(miAgente));
 	}
 }

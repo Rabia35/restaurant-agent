@@ -15,7 +15,7 @@ public class ContratarBodego extends MsgReceiver{
 	
 	public ContratarBodego(AgenteProveedor a, long deadline){
 		//Agent, MessageTemplate, deadline, DataStore, msgKey
-		super(a,MessageTemplate.MatchPerformative(Performativas.CONFIRMAR),deadline,null,null);
+		super(a,MessageTemplate.MatchPerformative(Performativas.CONFIRMAR),System.currentTimeMillis() + deadline,null,null);
 		miAgente=a;
 	}
 
