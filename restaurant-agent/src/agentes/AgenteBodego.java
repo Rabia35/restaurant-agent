@@ -1,5 +1,8 @@
 package agentes;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+
 import comportamientos.EscucharMensajes;
 
 import jade.core.AID;
@@ -25,8 +28,8 @@ public class AgenteBodego extends Agent {
 	public AID chef;
 	public AID proveedor;
 	
-	public int x;
-	public int y;
+	private int x;
+	private int y;
 	
 	protected void setup(){
 		fuerza=8000;
@@ -36,12 +39,42 @@ public class AgenteBodego extends Agent {
 	
 	protected void setup(Tipo tipo){
 		this.tipo = tipo;
-		x = 2;
-		y = 5 + tipo.ordinal();
+		setX(2);
+		setY(5 + tipo.ordinal());
 		AdministradorDF.daDeAlta(this, "AgenteBodego", "AgenteBodego"+tipo.name());
 		//chef = AdministradorDF.encuentraAgentes(this, "AgenteChef")[0];
 		proveedor = AdministradorDF.encuentraAgentes(this, "AgenteProveedor")[0];
 		addBehaviour(new EscucharMensajes(this));
 		System.out.println("Bodego "+tipo.name()+" creado.");
+	}
+	
+	public void setX(int x){
+		this.x=x;
+		try{
+			PrintWriter wr = new PrintWriter(tipo.name()+".txt");
+			wr.print(x + " " +y);
+			wr.close();
+		}catch(IOException e){
+			System.out.println("Problema al actualizar la posición en el archivo del agente "+tipo.name());
+		}
+	}
+	
+	public void setY(int y){
+		this.y=y;
+		try{
+			PrintWriter wr = new PrintWriter(tipo.name()+".txt");
+			wr.print(x + " " +y);
+			wr.close();
+		}catch(IOException e){
+			System.out.println("Problema al actualizar la posición en el archivo del agente "+tipo.name());
+		}
+	}
+	
+	public int getX(){
+		return x;
+	}
+	
+	public int getY(){
+		return y;
 	}
 }

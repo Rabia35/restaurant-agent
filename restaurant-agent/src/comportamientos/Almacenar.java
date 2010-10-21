@@ -43,45 +43,52 @@ public class Almacenar extends TickerBehaviour {
 	}
 	
 	private void ir(){
-		if(miAgente.y!=metaY && miAgente.x<metaX+miAgente.tipo.ordinal()+1){
-			miAgente.x++;
-			//escribir a archivo
-			return;
-		}
-		if(miAgente.y>metaY){
-			miAgente.y--;
-			//escribir a archivo
-			return;
-		}
-		if(miAgente.x>metaX){
-			miAgente.x--;
-			//escribir a archivo			
-			return;
-		}
-		//escribir a archivo
+		if(subir()) return;
+		if(izquierda())return;
+		if(bajar()) return;
 		estante.ponerIngrediente(miAgente.ingredientePorAlmacenar);
 		miAgente.ingredientePorAlmacenar=null;
 	}
 	
 	private void regresar(){
-		if(miAgente.y!=metaY && miAgente.x<metaX+miAgente.tipo.ordinal()+1){
-			miAgente.x++;
-			return;
-		}
-		if(miAgente.y<metaY){
-			miAgente.y++;
-			return;
-		}
-		if(miAgente.x>metaX){
-			miAgente.x--;
-			return;
-		}
+		if(subir()) return;
+		if(derecha())return;
+		if(bajar()) return;
 		if(ingredienteRecogido){
 			this.stop();
 		}
 	}
 	
 	private boolean estoyEnZonaPaquetes(){
-		return miAgente.x==2 && miAgente.y==5 + miAgente.tipo.ordinal();
+		return miAgente.getX()==2 && miAgente.getY()==5 + miAgente.tipo.ordinal();
+	}
+	
+	private boolean subir(){
+		if(miAgente.getY()!=metaY && miAgente.getX()<metaX+miAgente.tipo.ordinal()+1){
+			miAgente.setX(miAgente.getX()+1);
+			return true;
+		}	
+		return false;
+	}
+	private boolean izquierda(){
+		if(miAgente.getY()>metaY){
+			miAgente.setY(miAgente.getY()-1);
+			return true;
+		}
+		return false;
+	}
+	private boolean bajar(){
+		if(miAgente.getX()>metaX){
+			miAgente.setX(miAgente.getX()-1);
+			return true;
+		}
+		return false;
+	}
+	private boolean derecha(){
+		if(miAgente.getY()<metaY){
+			miAgente.setY(miAgente.getY()+1);
+			return true;
+		}
+		return false;
 	}
 }
