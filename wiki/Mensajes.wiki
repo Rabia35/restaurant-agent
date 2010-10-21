@@ -25,7 +25,7 @@
 2.Confirmar
   * A un bodego
 
-  Contenido vacío
+  Contenido: clave del Ingrediente#cantidad
 
   Se envía al primer agente que confirma traer un ingrediente.
 
@@ -50,7 +50,7 @@
 2.Confirmar
   * A un bodego
 
-  Contenido vacío
+  Contenido: clave del Ingrediente
 
   Se envía al primer agente que confirma llevarse el paquete.
 
