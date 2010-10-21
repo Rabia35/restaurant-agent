@@ -9,7 +9,7 @@ import util.*;
 public class CambioDeMenu extends TickerBehaviour 
 {
 	private static final long serialVersionUID = 19836069642149489L;
-	private static final long tiempoDeRevision = 10000;
+	private static final long tiempoDeRevision = 10000;	
 	
 	private AgenteAdministrador miAgente;
 
@@ -25,11 +25,18 @@ public class CambioDeMenu extends TickerBehaviour
 		miAgente.menu = Menu.obtenerMenu();
 		Receta receta = miAgente.menu.recetaImposibleDeServir();
 		
-		if (receta != null)
-		{
-			System.out.println("Cambio de receta " + receta.nombre); //DEBUG
-			receta.resurtirReceta();
-			Mensaje.mandaMensaje(miAgente, Performativas.CAMBIAR, miAgente.agentesMenu, receta.clave);			
-		}
+		if (receta == null)
+			return;
+		
+		System.out.println("Cambio de receta " + receta.nombre); //DEBUG
+		
+		receta.resurtirReceta();
+		Mensaje.mandaMensaje(miAgente, Performativas.CAMBIAR, miAgente.agentesMenu, receta.clave);
+		
+		miAgente.propuestas = new String[miAgente.totalAgentesMenu][miAgente.totalAgentesMenu*miAgente.totalAgentesMenu];
+		miAgente.valores = new int[miAgente.totalAgentesMenu][miAgente.totalAgentesMenu*miAgente.totalAgentesMenu];
+		
+		miAgente.addBehaviour(new RecibirPropuestasMenu(miAgente, 1));
+		this.stop();		
 	}
 }

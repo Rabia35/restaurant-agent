@@ -59,7 +59,7 @@ public class BaseDeDatos
 			stat.execute(query);
 			desconectar();	
 		} catch (Exception e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}				
 	}
 }

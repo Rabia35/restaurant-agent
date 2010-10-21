@@ -26,7 +26,7 @@ public class AgenteCreador extends Agent
 			b3.start();
 		} catch (StaleProxyException e) {
 			e.printStackTrace();
-		}
+		}		
 		
 		doDelete();
 	}
