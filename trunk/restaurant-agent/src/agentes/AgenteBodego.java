@@ -15,7 +15,7 @@ public class AgenteBodego extends Agent {
 	private static final long serialVersionUID = 7814749511523854605L;
 	
 	public Pedido ingredientePorLlevar = null;
-	public Ingrediente ingredientePorAcomodar = null;
+	public Ingrediente ingredientePorAlmacenar = null;
 	public boolean enContratacion = false;
 	
 	public Tipo tipo;
@@ -36,13 +36,12 @@ public class AgenteBodego extends Agent {
 	
 	protected void setup(Tipo tipo){
 		this.tipo = tipo;
+		x = 2;
+		y = 5 + tipo.ordinal();
 		AdministradorDF.daDeAlta(this, "AgenteBodego", "AgenteBodego"+tipo.name());
 		//chef = AdministradorDF.encuentraAgentes(this, "AgenteChef")[0];
 		proveedor = AdministradorDF.encuentraAgentes(this, "AgenteProveedor")[0];
 		addBehaviour(new EscucharMensajes(this));
-		//addBehaviour(new Almacenar(this));
-		//addBehaviour(new Llevar(this));
 		System.out.println("Bodego "+tipo.name()+" creado.");
 	}
 }
-

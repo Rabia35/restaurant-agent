@@ -103,11 +103,75 @@ public class Estante
 		
 		bd.ejectuarDML(" update estante set " + 
 				         " ingrediente = "  + NoSQLInjection.comillas(ing.clave) + " , " + 
-				         " cantidad = " + ing.cantidad + ", " + 
+				         " cantidad = " + ing.cantidadPorPaquete + ", " + 
 				         " fechaColocado = now()" +
 				         " where posicionX = " + posicionX + 
 				         " and posicionY = " +  posicionY + 
 				         " and altura = " + altura);
+	}
+	
+	public static Estante apartarEstanteLibre(int altura)
+	{
+		Estante est = null;
+		
+		try
+		{
+			BaseDeDatos bd = new BaseDeDatos();
+			
+			bd.conectar();
+			
+			ResultSet rs = bd.realizarQuery(" select * from estante where altura <= " + altura+
+											" and isnull(ingrediente) and refrigerador=0"+
+											" order by altura desc");
+			
+			if(rs.first()){
+				est = new Estante();					
+				
+				est.posicionX = rs.getInt("posicionX");
+				est.posicionY = rs.getInt("posicionY");
+				est.altura = rs.getInt("altura");
+				est.refrigerador = rs.getBoolean("refrigerador");
+				est.ingrediente = null;
+						
+				//Marcar estante como ocupado
+				bd.ejectuarDML(" update estante set ingrediente = temp , " + 
+				         " where posicionX = " + est.posicionX + 
+				         " and posicionY = " +  est.posicionY + 
+				         " and altura = " + est.altura);
+			}else{
+				return null;
+			}
+			bd.desconectar();
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+		return est;
+	}
+	
+	public static Estante liberarEstante(int x, int y, int altura)
+	{
+		Estante est = null;
+		
+		try
+		{
+			BaseDeDatos bd = new BaseDeDatos();
+			
+			bd.conectar();
+			
+			bd.ejectuarDML(" update estante set ingrediente = null , " + 
+			         " where posicionX = " + x + 
+			         " and posicionY = " +  y + 
+			         " and altura = " + altura);
+			
+			bd.desconectar();
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+		return est;
 	}
 	
 	@Override
