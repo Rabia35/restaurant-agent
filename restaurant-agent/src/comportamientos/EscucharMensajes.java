@@ -46,9 +46,14 @@ public class EscucharMensajes extends TickerBehaviour {
 	}
 	
 	private void responderAProveedor(ACLMessage msg){
-		Estante estante = Estante.apartarEstanteLibre(miAgente.altura);
+		Ingrediente ingredienteSolicitado= Ingrediente.obtenerIngrediente(msg.getContent());
+		Estante estante;
+		if(ingredienteSolicitado.refrigerado){
+			estante = Estante.apartarRefriLibre(miAgente.altura);
+		}else{
+			estante = Estante.apartarEstanteLibre(miAgente.altura);	
+		}
 		if(estante!=null){
-			Ingrediente ingredienteSolicitado= Ingrediente.obtenerIngrediente(msg.getContent());
 			if(ingredienteSolicitado.peso*ingredienteSolicitado.cantidadPorPaquete<=miAgente.fuerza){
 				Mensaje.mandaMensaje(miAgente, Performativas.CONFIRMAR, miAgente.proveedor, "");
 				miAgente.enContratacion=true;
