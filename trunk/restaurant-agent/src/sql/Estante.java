@@ -112,6 +112,16 @@ public class Estante
 	
 	public static Estante apartarEstanteLibre(int altura)
 	{
+		return apartar(altura,0);
+	}
+	
+	public static Estante apartarRefriLibre(int altura)
+	{
+		return apartar(altura,1);
+	}
+	
+	public static Estante apartar(int altura,int refri)
+	{
 		Estante est = null;
 		
 		try
@@ -121,7 +131,7 @@ public class Estante
 			bd.conectar();
 			
 			ResultSet rs = bd.realizarQuery(" select * from estante where altura <= " + altura+
-											" and isnull(ingrediente) and refrigerador=0"+
+											" and isnull(ingrediente) and refrigerador="+refri+
 											" order by altura desc");
 			
 			if(rs.first()){
@@ -148,7 +158,7 @@ public class Estante
 		}
 		
 		return est;
-	}
+	}	
 	
 	public static Estante liberarEstante(int x, int y, int altura)
 	{
