@@ -19,4 +19,9 @@ public class Mensaje
 		agente.send(msj);
 		System.out.println(msj); //DEBUG
 	}
+	
+	public static void mandaMensaje(Agent agente, int performativa, AID destinatario, String mensaje)
+	{
+		mandaMensaje(agente,performativa,new AID[]{destinatario},mensaje);
+	}
 }

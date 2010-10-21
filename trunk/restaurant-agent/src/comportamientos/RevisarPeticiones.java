@@ -5,27 +5,29 @@ import sql.Ingrediente;
 import sql.Peticion;
 import util.Mensaje;
 import util.Performativas;
-import jade.core.behaviours.CyclicBehaviour;
+import jade.core.behaviours.TickerBehaviour;
 
 
-public class RevisarPeticiones extends CyclicBehaviour {
+public class RevisarPeticiones extends TickerBehaviour {
 
+	private static final long serialVersionUID = -8423084959540874770L;
+	private static final long tiempoDeRevision = 1000;
+	
 	AgenteProveedor miAgente;
 	
 	public RevisarPeticiones(AgenteProveedor a) {
-		super(a);
+		super(a,tiempoDeRevision);
 		miAgente = a;
 	}
-
-	private static final long serialVersionUID = -8423084959540874770L;
+	
 	@Override
-	public void action() {
+	protected void onTick() {
 		if(miAgente.ingredientePorAcomodar==null){
 			Ingrediente ingredientePedido = Peticion.obtenerPeticion();
 			if(ingredientePedido!=null){
 				miAgente.ingredientePorAcomodar = ingredientePedido;
 				Mensaje.mandaMensaje(miAgente, Performativas.INFORMAR, miAgente.agentesBodegos, ingredientePedido.clave);
-				myAgent.addBehaviour(new ContratarBodego(miAgente,2000L));
+				myAgent.addBehaviour(new ContratarBodego(miAgente,System.currentTimeMillis()+2000L));
 			}
 		}
 	}

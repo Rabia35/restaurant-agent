@@ -3,7 +3,6 @@ package comportamientos;
 import util.Mensaje;
 import util.Performativas;
 import agentes.AgenteProveedor;
-import jade.core.AID;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
 import jade.proto.states.MsgReceiver;
@@ -22,9 +21,9 @@ public class ContratarBodego extends MsgReceiver{
 	protected void handleMessage(ACLMessage msg) {
 		if(msg==null){
 			Mensaje.mandaMensaje(miAgente, Performativas.INFORMAR, miAgente.agentesBodegos, miAgente.ingredientePorAcomodar.clave);
-			myAgent.addBehaviour(new ContratarBodego(miAgente,2000L));
+			myAgent.addBehaviour(new ContratarBodego(miAgente,System.currentTimeMillis()+2000L));
 		}else{
-			Mensaje.mandaMensaje(miAgente, Performativas.CONFIRMAR, new AID[]{msg.getSender()}, ""); 
+			Mensaje.mandaMensaje(miAgente, Performativas.CONFIRMAR, msg.getSender(), miAgente.ingredientePorAcomodar.clave); 
 			miAgente.ingredientePorAcomodar=null;
 		}
 	}
