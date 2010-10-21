@@ -15,7 +15,7 @@ public class AgenteProveedor extends Agent {
 	
 	
 	protected void setup(){
-		addBehaviour(new BuscaAgentesParaProveedor(this));		
+		addBehaviour(new BuscaAgentesParaProveedor(this));
 		AdministradorDF.daDeAlta(this, "AgenteProveedor", "AgenteProveedor");	
 		agentesBodegos= null;
 		System.out.println("Proveedor creado.");
