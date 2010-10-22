@@ -11,7 +11,7 @@ import agentes.AgenteBodego;
 public class EscucharMensajes extends TickerBehaviour {
 
 	private static final long serialVersionUID = -6627936988291059108L;
-	private static final long tiempoDeRevision = 1000L;
+	private static final long tiempoDeRevision = 500L;
 	AgenteBodego miAgente;
 	
 	public EscucharMensajes(AgenteBodego a) {
@@ -25,10 +25,10 @@ public class EscucharMensajes extends TickerBehaviour {
 		if(!miAgente.enContratacion && miAgente.ingredientePorAlmacenar==null && miAgente.ingredientePorLlevar==null){
 			ACLMessage msg = myAgent.receive();
 			if(msg!=null){
-				if(msg.getSender()==miAgente.chef){
+				if(msg.getSender().equals(miAgente.chef)){
 					responderAChef(msg);
 				}
-				if(msg.getSender()==miAgente.proveedor){
+				if(msg.getSender().equals(miAgente.proveedor)){
 					responderAProveedor(msg);
 				}
 			}
@@ -55,10 +55,11 @@ public class EscucharMensajes extends TickerBehaviour {
 		}
 		if(estante!=null){
 			if(ingredienteSolicitado.peso*ingredienteSolicitado.cantidadPorPaquete<=miAgente.fuerza){
-				Mensaje.mandaMensaje(miAgente, Performativas.CONFIRMAR, miAgente.proveedor, "");
+				Mensaje.mandaMensaje(msg.getConversationId(),miAgente, Performativas.CONFIRMAR, miAgente.proveedor, "");
 				miAgente.enContratacion=true;
 				myAgent.addBehaviour(new ConcretarContratacion(miAgente,System.currentTimeMillis()+2000L,estante));
 			}else{
+				System.out.println(miAgente.getLocalName()+" "+ miAgente.getClass()+" no puede cargar el paquete");//DEBUG
 				Estante.liberarEstante(estante.posicionX, estante.posicionY, estante.altura);
 			}
 		}
