@@ -16,9 +16,9 @@ public class AgenteCreador extends Agent
 		try {
 			AgentController a = c.createNewAgent("AgenteAdministrador", "agentes.AgenteAdministrador", null);
 			AgentController p = c.createNewAgent("AgenteProveedor", "agentes.AgenteProveedor", null);
-			AgentController b1 = c.createNewAgent("AgenteBodego1", "agentes.AgenteBodego",null);
-			AgentController b2 = c.createNewAgent("AgenteBodego2", "agentes.AgenteBodegoFuerte",null);
-			AgentController b3 = c.createNewAgent("AgenteBodego3", "agentes.AgenteBodegoAlto",null);
+			AgentController b1 = c.createNewAgent("AgenteBodegoNormal", "agentes.AgenteBodego",null);
+			AgentController b2 = c.createNewAgent("AgenteBodegoFuerte", "agentes.AgenteBodegoFuerte",null);
+			AgentController b3 = c.createNewAgent("AgenteBodegoAlto", "agentes.AgenteBodegoAlto",null);
 			a.start();
 			p.start();
 			b1.start();
