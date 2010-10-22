@@ -26,8 +26,9 @@ public class RevisarPeticiones extends TickerBehaviour {
 			Ingrediente ingredientePedido = Peticion.obtenerPeticion();
 			if(ingredientePedido!=null){
 				miAgente.ingredientePorAcomodar = ingredientePedido;
-				Mensaje.mandaMensaje(miAgente, Performativas.INFORMAR, miAgente.agentesBodegos, ingredientePedido.clave);
-				myAgent.addBehaviour(new ContratarBodego(miAgente,System.currentTimeMillis()+2000L));
+				miAgente.idConversacion++;
+				Mensaje.mandaMensaje("Paquete "+miAgente.idConversacion,miAgente, Performativas.INFORMAR, miAgente.agentesBodegos, ingredientePedido.clave);
+				myAgent.addBehaviour(new ContratarBodego(miAgente,"Paquete "+miAgente.idConversacion,2000L));
 			}
 		}
 	}

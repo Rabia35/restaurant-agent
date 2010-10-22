@@ -12,6 +12,7 @@ public class AgenteProveedor extends Agent {
 	private static final long serialVersionUID = -6300185715958185382L;
 	public Ingrediente ingredientePorAcomodar = null;
 	public AID[] agentesBodegos;
+	public int idConversacion=0;
 	
 	
 	protected void setup(){
