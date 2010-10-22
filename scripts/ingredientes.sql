@@ -53,7 +53,7 @@ insert into ingrediente (clave, nombre, peso, costo, refrigerado, caducidad, can
    values ('almjs', 'Almejas', 30, 0, 0, 0, 10);   
 
 insert into ingrediente (clave, nombre, peso, costo, refrigerado, caducidad, cantidadPorPaquete)
-   values ('chmpñ', 'Champiñones', 15, 0, 0, 0, 25);   
+   values ('chmpn', 'Champinones', 15, 0, 0, 0, 25);   
    
 insert into ingrediente (clave, nombre, peso, costo, refrigerado, caducidad, cantidadPorPaquete)
    values ('tofu', 'Tofu', 200, 0, 0, 0, 1);   

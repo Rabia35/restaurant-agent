@@ -35,19 +35,19 @@ insert into receta(clave, nombre, ingrediente1, cantidad1, ingrediente2, cantida
     values('paela', 'Paella', 'camrn', 7, 'arroz', 1, 'almjs', 3);
 
 insert into receta(clave, nombre, ingrediente1, cantidad1, ingrediente2, cantidad2, ingrediente3, cantidad3)
-    values('almjs', 'Almejas a la italiana', 'almjs', 7, 'chmpñ', 5, 'queso', 2);
+    values('almjs', 'Almejas a la italiana', 'almjs', 7, 'chmpn', 5, 'queso', 2);
 
 insert into receta(clave, nombre, ingrediente1, cantidad1, ingrediente2, cantidad2, ingrediente3, cantidad3)
-    values('spvgt', 'Sopa vegetariana', 'pasta', 2, 'chmpñ', 5, 'tofu', 1);
+    values('spvgt', 'Sopa vegetariana', 'pasta', 2, 'chmpn', 5, 'tofu', 1);
 
 insert into receta(clave, nombre, ingrediente1, cantidad1, ingrediente2, cantidad2, ingrediente3, cantidad3, ingrediente4, cantidad4)
-    values('ingls', 'Desayuno ingles', 'huevo', 3, 'tocno', 5, 'slchi', 3, 'chmpñ', 5);	
+    values('ingls', 'Desayuno ingles', 'huevo', 3, 'tocno', 5, 'slchi', 3, 'chmpn', 5);	
 
 insert into receta(clave, nombre, ingrediente1, cantidad1, ingrediente2, cantidad2, ingrediente3, cantidad3)
     values('aljit', 'Almejas con jitomate', 'almjs', 5, 'jitom', 4, 'ajo', 3);
 
 insert into receta(clave, nombre, ingrediente1, cantidad1, ingrediente2, cantidad2, ingrediente3, cantidad3)
-    values('chmpñ', 'Crema de champiñones', 'chmpñ', 8, 'tocno', 3, 'chich', 20);
+    values('chmpn', 'Crema de champinones', 'chmpn', 8, 'tocno', 3, 'chich', 20);
 
 insert into receta(clave, nombre, ingrediente1, cantidad1, ingrediente2, cantidad2, ingrediente3, cantidad3, ingrediente4, cantidad4)
     values('arroz', 'Arroz cremoso con salmon', 'salmn', 1, 'arroz', 1, 'ajo', 4, 'pmnto', 1);	
