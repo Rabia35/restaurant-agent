@@ -3,6 +3,7 @@ package util;
 import jade.core.AID;
 import jade.core.Agent;
 import jade.lang.acl.ACLMessage;
+import jade.util.leap.Iterator;
 
 public class Mensaje
 {
@@ -32,6 +33,20 @@ public class Mensaje
 		msj.setOntology("Restaurante");
 		msj.setContent(mensaje);
 		agente.send(msj);
-		System.out.println(msj); //DEBUG
+		printMessage(msj); //DEBUG
+	}
+	
+	private static void printMessage(ACLMessage msj){
+		System.out.println("---------");
+		System.out.println("Mensaje enviado:");
+		System.out.println("  "+Performativas.getNombre(msj.getPerformative()));
+		System.out.println("  :id de conversación - "+msj.getConversationId());
+		System.out.println("  :emisor - "+msj.getSender().getLocalName());
+		System.out.print("  :receptor - ");
+		Iterator receptores =msj.getAllReceiver();
+		while(receptores.hasNext())
+			System.out.print(((AID)receptores.next()).getLocalName()+" ");
+		System.out.println("\n  :contenido "+msj.getContent());
+		System.out.println("---------");
 	}
 }

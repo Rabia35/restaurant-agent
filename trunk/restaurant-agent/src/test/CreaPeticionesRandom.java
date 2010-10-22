@@ -49,7 +49,7 @@ public class CreaPeticionesRandom extends TickerBehaviour
 	{
 		int ing = random.nextInt(ingredientes.length);
 		Peticion.agregarPeticion(Ingrediente.obtenerIngrediente(ingredientes[ing]));
-		System.out.println("Peticion agregada: " + ingredientes[ing]);
+		//System.out.println("Peticion agregada: " + ingredientes[ing]);
 	}
 
 }

@@ -7,7 +7,7 @@ import jade.core.behaviours.TickerBehaviour;
 public class Almacenar extends TickerBehaviour {
 
 	private static final long serialVersionUID = -3170841491165005518L;
-	private static final long tiempoDeMovimiento = 500L;
+	private static final long tiempoDeMovimiento = 1000L;
 	AgenteBodego miAgente;
 	
 	private int metaX = 0;

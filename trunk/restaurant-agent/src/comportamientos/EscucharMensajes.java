@@ -32,7 +32,10 @@ public class EscucharMensajes extends TickerBehaviour {
 					responderAProveedor(msg);
 				}
 			}
+		}else{
+			clearMessageQueue();
 		}
+		
 	}
 	
 	private void responderAChef(ACLMessage msg){
@@ -59,10 +62,15 @@ public class EscucharMensajes extends TickerBehaviour {
 				miAgente.enContratacion=true;
 				myAgent.addBehaviour(new ConcretarContratacion(miAgente,System.currentTimeMillis()+2000L,estante));
 			}else{
-				System.out.println(miAgente.getLocalName()+" "+ miAgente.getClass()+" no puede cargar el paquete");//DEBUG
+				System.out.println(miAgente.getLocalName()+" no puede cargar el paquete");//DEBUG
 				Estante.liberarEstante(estante.posicionX, estante.posicionY, estante.altura);
 			}
 		}
 	}
 	
+	private void clearMessageQueue(){
+		while (myAgent.receive() != null) {
+			  ;
+		}	
+	}	
 }

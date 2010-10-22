@@ -34,13 +34,14 @@ public class ConcretarContratacion extends MsgReceiver{
 	protected void handleMessage(ACLMessage msg) {
 		miAgente.enContratacion=false;
 		if(msg!=null){
-			if(msg.getSender()==miAgente.chef){
+			if(msg.getSender().equals(miAgente.chef)){
 				String[]content = msg.getContent().split("#", 2);
 				miAgente.ingredientePorLlevar = new Pedido(content[0],Integer.parseInt(content[1]));
 				//addBehaviour(new Llevar(this));
 			}
-			if(msg.getSender()==miAgente.proveedor){
+			if(msg.getSender().equals(miAgente.proveedor)){
 				miAgente.ingredientePorAlmacenar = Ingrediente.obtenerIngrediente(msg.getContent());
+				System.out.println(miAgente.getLocalName()+" almacenando "+miAgente.ingredientePorAlmacenar.nombre);
 				myAgent.addBehaviour(new Almacenar(miAgente,estante));
 			}
 		}else if(estante!=null){
