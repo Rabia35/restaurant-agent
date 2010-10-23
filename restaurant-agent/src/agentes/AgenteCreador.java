@@ -4,6 +4,7 @@ import jade.core.Agent;
 import jade.wrapper.AgentController;
 import jade.wrapper.ContainerController;
 import jade.wrapper.StaleProxyException;
+import sql.Estante;
 
 public class AgenteCreador extends Agent 
 {
@@ -12,6 +13,7 @@ public class AgenteCreador extends Agent
 	@Override
 	protected void setup() 
 	{	
+		Estante.vaciaTodo();
 		ContainerController c = getContainerController();
 		try {
 			AgentController a = c.createNewAgent("AgenteAdministrador", "agentes.AgenteAdministrador", null);
