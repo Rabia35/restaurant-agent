@@ -32,7 +32,7 @@ public class AgenteBodego extends Agent {
 	private int y;
 	
 	protected void setup(){
-		fuerza=8000;
+		fuerza=350;
 		altura=2;
 		setup(Tipo.Normal);
 	}

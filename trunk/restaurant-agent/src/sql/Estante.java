@@ -184,6 +184,10 @@ public class Estante
 		return est;
 	}
 	
+	public static void vaciaTodo(){
+		BaseDeDatos bd = new BaseDeDatos();
+		bd.ejectuarDML(" update estante set ingrediente = null");
+	}
 	@Override
 	public String toString() {
 		String s = 

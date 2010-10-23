@@ -14,7 +14,7 @@ public class CreaPeticionesRandom extends TickerBehaviour
 {
 	private static final long serialVersionUID = 1963340658548057187L;
 	
-	private static final long tiempoDeRevision = 8000;
+	private static final long tiempoDeRevision = 9000;
 	private String[] ingredientes;
 	private Random random;
 

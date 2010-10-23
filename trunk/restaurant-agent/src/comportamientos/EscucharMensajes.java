@@ -49,6 +49,7 @@ public class EscucharMensajes extends TickerBehaviour {
 	}
 	
 	private void responderAProveedor(ACLMessage msg){
+		System.out.println("Respondiendo a proveedor"+myAgent.getLocalName());
 		Ingrediente ingredienteSolicitado= Ingrediente.obtenerIngrediente(msg.getContent());
 		Estante estante;
 		if(ingredienteSolicitado.refrigerado){
@@ -65,6 +66,8 @@ public class EscucharMensajes extends TickerBehaviour {
 				System.out.println(miAgente.getLocalName()+" no puede cargar el paquete");//DEBUG
 				Estante.liberarEstante(estante.posicionX, estante.posicionY, estante.altura);
 			}
+		}else{
+			System.out.println(myAgent.getLocalName()+"no encontró un estante disponible");
 		}
 	}
 	
