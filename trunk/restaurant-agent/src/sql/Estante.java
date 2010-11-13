@@ -1,6 +1,8 @@
 package sql;
 
 import java.sql.ResultSet;
+import java.sql.Timestamp;
+
 import util.*;
 
 public class Estante 
@@ -11,7 +13,9 @@ public class Estante
 	public boolean refrigerador;		
 	
 	public Ingrediente ingrediente;
-	
+	public Timestamp fechaColocado;
+	public int cantidad;
+		
 	public static Estante obtenerEstante(int x, int y, int altura)
 	{
 		Estante est = null;
@@ -37,8 +41,8 @@ public class Estante
 			
 			if (est.ingrediente != null)
 			{			
-				est.ingrediente.fechaColocado = rs.getTimestamp("fechaColocado");
-				est.ingrediente.cantidad = rs.getInt("cantidad");
+				est.fechaColocado = rs.getTimestamp("fechaColocado");
+				est.cantidad = rs.getInt("cantidad");
 			}
 			
 			bd.desconectar();
@@ -55,8 +59,8 @@ public class Estante
 		if(ingrediente == null)
 			return null;
 		
-		if(cantidad > ingrediente.cantidad)
-			cantidad = ingrediente.cantidad;
+		if(cantidad > this.cantidad)
+			cantidad = this.cantidad;
 		
 		Ingrediente sacado = new Ingrediente();
 		
@@ -68,14 +72,11 @@ public class Estante
 		sacado.caducidad = ingrediente.caducidad;
 		sacado.cantidadPorPaquete = ingrediente.cantidadPorPaquete;
 		
-		sacado.cantidad = cantidad;
-		sacado.fechaColocado = ingrediente.fechaColocado;
-		
-		ingrediente.cantidad -= cantidad;
+		this.cantidad -= cantidad;
 		
 		BaseDeDatos bd = new BaseDeDatos();				
 		
-		if (ingrediente.cantidad == 0)
+		if (this.cantidad == 0)
 		{
 			bd.ejectuarDML(" update estante set ingrediente = null, cantidad = 0, fechaColocado = null" +
 					         " where posicionX = " + posicionX + 
@@ -84,7 +85,7 @@ public class Estante
 			ingrediente = null;
 		}
 		else
-			bd.ejectuarDML(" update estante set cantidad = " + ingrediente.cantidad + 
+			bd.ejectuarDML(" update estante set cantidad = " + this.cantidad + 
 			         " where posicionX = " + posicionX + 
 			         " and posicionY = " +  posicionY + 
 			         " and altura = " + altura);
@@ -195,7 +196,9 @@ public class Estante
 			"\nposicionY = " + posicionY +
 			"\naltura = " + altura +
 			"\nrefrigerador = " + refrigerador +
-			"\ningrediente = " + (ingrediente == null ? null : ingrediente.nombre);			
+			"\ningrediente = " + (ingrediente == null ? null : ingrediente.nombre +
+			"\nfecha colocado = " + fechaColocado +
+			"\ncantidad = " + cantidad);			
 		return s;
 	}
 

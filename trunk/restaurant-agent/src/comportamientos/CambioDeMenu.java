@@ -28,7 +28,7 @@ public class CambioDeMenu extends TickerBehaviour
 		if (receta == null)
 			return;
 		
-		System.out.println("Cambio de receta " + receta.nombre); //DEBUG
+		Debug.print("Cambio de receta " + receta.nombre); //DEBUG
 		
 		receta.resurtirReceta();
 		Mensaje.mandaMensaje(miAgente, Performativas.CAMBIAR, miAgente.agentesMenu, receta.clave);

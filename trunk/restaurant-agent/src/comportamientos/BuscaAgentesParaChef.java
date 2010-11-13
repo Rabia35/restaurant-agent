@@ -2,6 +2,7 @@ package comportamientos;
 
 import jade.core.behaviours.WakerBehaviour;
 import util.AdministradorDF;
+import util.Debug;
 import agentes.AgenteChef;
 
 public class BuscaAgentesParaChef  extends WakerBehaviour
@@ -22,6 +23,6 @@ public class BuscaAgentesParaChef  extends WakerBehaviour
 	protected void onWake() {
 		super.onWake();
 		miAgente.agentesBodegos = AdministradorDF.encuentraAgentes(miAgente, "AgenteBodego");
-		System.out.println("Agentes Bodegos agregados para Chef"); //DEBUG
+		Debug.print("Agentes Bodegos agregados para Chef"); //DEBUG
 	}
 }

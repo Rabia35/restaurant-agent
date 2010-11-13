@@ -1,7 +1,6 @@
 package sql;
 
 import java.sql.ResultSet;
-import java.sql.Timestamp;
 
 import util.*;
 
@@ -14,9 +13,6 @@ public class Ingrediente
 	public boolean refrigerado;
 	public int caducidad;
 	public int cantidadPorPaquete;
-	
-	public Timestamp fechaColocado;
-	public int cantidad;
 	
 	public static Ingrediente obtenerIngrediente(String clave)
 	{
@@ -54,7 +50,7 @@ public class Ingrediente
 		return ing;
 	}
 	
-	public boolean hayEnAlmacenSuficientes()
+	public boolean hayEnAlmacenSuficientes(int cantidad)
 	{
 		try
 		{
@@ -88,9 +84,7 @@ public class Ingrediente
 			"\npeso = " + peso +
 			"\nrefrigerado = " + refrigerado +			
 			"\ncaducidad = " + caducidad +
-			"\ncantidadPorPaquete = " + cantidadPorPaquete +
-			"\nfechaColocado = " + fechaColocado +
-			"\ncantidad = " + cantidad;
+			"\ncantidadPorPaquete = " + cantidadPorPaquete;
 		return s;
 	}
 }

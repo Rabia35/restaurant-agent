@@ -24,7 +24,7 @@ public class BaseDeDatos
 			stat = conn.createStatement();		
 		} catch (Exception e) 
 		{
-			e.printStackTrace();
+			System.err.println(e);
 		}				
 	}
 	
@@ -48,7 +48,7 @@ public class BaseDeDatos
 			conn.close();
 		} catch (SQLException e) 
 		{
-			e.printStackTrace();
+			System.err.println(e);
 		}
 	}
 
@@ -59,7 +59,8 @@ public class BaseDeDatos
 			stat.execute(query);
 			desconectar();	
 		} catch (Exception e) {
-			//e.printStackTrace();
+			//NOTA: Esta operación puede dar excepción seguido
+			//por lo que no se imprime nada
 		}				
 	}
 }

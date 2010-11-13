@@ -5,6 +5,7 @@ import jade.lang.acl.MessageTemplate;
 import jade.proto.states.MsgReceiver;
 import sql.Estante;
 import sql.Ingrediente;
+import util.Debug;
 import util.Pedido;
 import util.Performativas;
 import agentes.AgenteBodego;
@@ -41,7 +42,7 @@ public class ConcretarContratacion extends MsgReceiver{
 			}
 			if(msg.getSender().equals(miAgente.proveedor)){
 				miAgente.ingredientePorAlmacenar = Ingrediente.obtenerIngrediente(msg.getContent());
-				System.out.println(miAgente.getLocalName()+" almacenando "+miAgente.ingredientePorAlmacenar.nombre);
+				Debug.print(miAgente.getLocalName()+" almacenando "+miAgente.ingredientePorAlmacenar.nombre);
 				myAgent.addBehaviour(new Almacenar(miAgente,estante));
 			}
 		}else if(estante!=null){

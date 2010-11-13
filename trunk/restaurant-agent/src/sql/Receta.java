@@ -11,6 +11,7 @@ public class Receta
 	public String nombre;
 	
 	public Ingrediente ingredientes[];
+	public int cantidadIngrediente[];
 	
 	public static Receta obtenerReceta(String clave)
 	{
@@ -37,13 +38,14 @@ public class Receta
 					break;
 			
 			rec.ingredientes = new Ingrediente[totalIngredientes];
+			rec.cantidadIngrediente = new int[totalIngredientes];
 			
 			for(int i = 0; i < totalIngredientes; i++)
 			{
 				rec.ingredientes[i] = new Ingrediente();
 				
 				rec.ingredientes[i].clave = rs.getString("ingrediente" + (i + 1));
-				rec.ingredientes[i].cantidad = rs.getInt("cantidad" + (i + 1));
+				rec.cantidadIngrediente[i] = rs.getInt("cantidad" + (i + 1));
 			}
 
 			bd.desconectar();
@@ -58,7 +60,7 @@ public class Receta
 	public Ingrediente ingredienteFaltante()
 	{
 		for (int i = 0; i < ingredientes.length; i++)
-			if (!ingredientes[i].hayEnAlmacenSuficientes())
+			if (!ingredientes[i].hayEnAlmacenSuficientes(cantidadIngrediente[i]))
 				return ingredientes[i];
 		return null;
 	}
@@ -66,7 +68,7 @@ public class Receta
 	public void resurtirReceta()
 	{
 		for (int i = 0; i < ingredientes.length; i++)
-			if (!ingredientes[i].hayEnAlmacenSuficientes())
+			if (!ingredientes[i].hayEnAlmacenSuficientes(cantidadIngrediente[i]))
 				Peticion.agregarPeticion(ingredientes[i]);
 	}
 	
@@ -78,7 +80,7 @@ public class Receta
 			"\nnombre = " + nombre;
 		
 		for(int i = 0; i < ingredientes.length; i++)
-			s += "\n\n\nIngrediente " + (i + 1) + "\n\n" + ingredientes[i];
+			s += "\n\n\nIngrediente " + (i + 1) + " X " + cantidadIngrediente[i] + " \n\n" + ingredientes[i];
 
 		return s;
 	}

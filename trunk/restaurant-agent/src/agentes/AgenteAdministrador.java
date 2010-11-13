@@ -3,6 +3,7 @@ package agentes;
 import sql.Menu;
 import test.CreaPeticionesRandom;
 import util.AdministradorDF;
+import util.Debug;
 import comportamientos.BuscaAgentesParaAdministrador;
 import comportamientos.CambioDeMenu;
 import jade.core.AID;
@@ -28,6 +29,6 @@ public class AgenteAdministrador extends Agent
 		addBehaviour(new CreaPeticionesRandom(this));
 		AdministradorDF.daDeAlta(this, "AgenteAdministrador", "AgenteAdministrador");	
 		agentesMenu = null;
-		System.out.println("Administrador creado.");
+		Debug.print("Administrador creado.");
 	}	
 }

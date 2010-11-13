@@ -1,6 +1,7 @@
 package comportamientos;
 
 import util.AdministradorDF;
+import util.Debug;
 import agentes.AgenteAdministrador;
 import jade.core.behaviours.WakerBehaviour;
 
@@ -21,6 +22,6 @@ public class BuscaAgentesParaAdministrador extends WakerBehaviour
 	protected void onWake() {
 		super.onWake();
 		miAgente.agentesMenu = AdministradorDF.encuentraAgentes(miAgente, "AgenteMenu");
-		System.out.println("Agentes Menu agregados para Administrador"); //DEBUG
+		Debug.print("Agentes Menu agregados para Administrador"); //DEBUG
 	}
 }

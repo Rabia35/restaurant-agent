@@ -2,6 +2,7 @@ package comportamientos;
 
 import sql.Estante;
 import sql.Ingrediente;
+import util.Debug;
 import util.Mensaje;
 import util.Performativas;
 import jade.core.behaviours.TickerBehaviour;
@@ -49,7 +50,7 @@ public class EscucharMensajes extends TickerBehaviour {
 	}
 	
 	private void responderAProveedor(ACLMessage msg){
-		System.out.println("Respondiendo a proveedor"+myAgent.getLocalName());
+		Debug.print("Respondiendo a proveedor"+myAgent.getLocalName());
 		Ingrediente ingredienteSolicitado= Ingrediente.obtenerIngrediente(msg.getContent());
 		Estante estante;
 		if(ingredienteSolicitado.refrigerado){
@@ -63,11 +64,11 @@ public class EscucharMensajes extends TickerBehaviour {
 				miAgente.enContratacion=true;
 				myAgent.addBehaviour(new ConcretarContratacion(miAgente,System.currentTimeMillis()+2000L,estante));
 			}else{
-				System.out.println(miAgente.getLocalName()+" no puede cargar el paquete");//DEBUG
+				Debug.print(miAgente.getLocalName()+" no puede cargar el paquete");//DEBUG
 				Estante.liberarEstante(estante.posicionX, estante.posicionY, estante.altura);
 			}
 		}else{
-			System.out.println(myAgent.getLocalName()+"no encontró un estante disponible");
+			Debug.print(myAgent.getLocalName()+"no encontró un estante disponible");
 		}
 	}
 	

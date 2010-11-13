@@ -1,6 +1,7 @@
 package comportamientos;
 
 import sql.Receta;
+import util.Debug;
 import util.Performativas;
 import agentes.AgenteAdministrador;
 import jade.lang.acl.ACLMessage;
@@ -26,7 +27,6 @@ public class RecibirPropuestasMenu extends MsgReceiver
 	@Override
 	protected void handleMessage(ACLMessage msg) 
 	{
-		System.out.println(msg);
 		if(msg != null)
 			descomponMensaje(msg.getContent());
 		
@@ -54,7 +54,7 @@ public class RecibirPropuestasMenu extends MsgReceiver
 		}
 		String s = miAgente.propuestas[0][indice];
 		miAgente.menu.agregaReceta(Receta.obtenerReceta(s));
-		System.out.println("Nueva receta en el menu: " + s + " con un beneficio de " + total); //DEBUG
+		Debug.print("Nueva receta en el menu: " + s + " con un beneficio de " + total); //DEBUG
 	}
 
 	private void descomponMensaje(String contenido) 
@@ -65,7 +65,7 @@ public class RecibirPropuestasMenu extends MsgReceiver
 			miAgente.propuestas[identificador - 1][i / 2] = splitted[i];
 			miAgente.valores[identificador - 1][i / 2] = Integer.parseInt(splitted[i + 1]);			
 		}
-		System.out.println("Propuesta #" + identificador + " recibida."); //DEBUG
+		Debug.print("Propuesta #" + identificador + " recibida."); //DEBUG
 	}
 
 	private void esperaSiguiente()
