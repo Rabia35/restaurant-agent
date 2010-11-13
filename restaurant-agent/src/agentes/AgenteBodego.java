@@ -9,6 +9,7 @@ import jade.core.AID;
 import jade.core.Agent;
 import sql.Ingrediente;
 import util.AdministradorDF;
+import util.Debug;
 import util.Pedido;
 
 public class AgenteBodego extends Agent {
@@ -45,7 +46,7 @@ public class AgenteBodego extends Agent {
 		//chef = AdministradorDF.encuentraAgentes(this, "AgenteChef")[0];
 		proveedor = AdministradorDF.encuentraAgentes(this, "AgenteProveedor")[0];
 		addBehaviour(new EscucharMensajes(this));
-		System.out.println("Bodego "+tipo.name()+" creado.");
+		Debug.print("Bodego "+tipo.name()+" creado.");
 	}
 	
 	public void setX(int x){
@@ -55,7 +56,7 @@ public class AgenteBodego extends Agent {
 			wr.print(x + " " +y);
 			wr.close();
 		}catch(IOException e){
-			System.out.println("Problema al actualizar la posición en el archivo del agente "+tipo.name());
+			Debug.print("Problema al actualizar la posición en el archivo del agente "+tipo.name());
 		}
 	}
 	
@@ -66,7 +67,7 @@ public class AgenteBodego extends Agent {
 			wr.print(x + " " +y);
 			wr.close();
 		}catch(IOException e){
-			System.out.println("Problema al actualizar la posición en el archivo del agente "+tipo.name());
+			Debug.print("Problema al actualizar la posición en el archivo del agente "+tipo.name());
 		}
 	}
 	

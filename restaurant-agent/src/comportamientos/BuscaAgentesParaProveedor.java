@@ -1,6 +1,7 @@
 package comportamientos;
 
 import util.AdministradorDF;
+import util.Debug;
 import agentes.AgenteProveedor;
 import jade.core.behaviours.WakerBehaviour;
 import comportamientos.RevisarPeticiones;
@@ -22,7 +23,7 @@ public class BuscaAgentesParaProveedor extends WakerBehaviour{
 	protected void onWake() {
 		super.onWake();
 		miAgente.agentesBodegos = AdministradorDF.encuentraAgentes(miAgente, "AgenteBodego");
-		System.out.println("Agentes Bodegos agregados para Proveedor"); //DEBUG
+		Debug.print("Agentes Bodegos agregados para Proveedor"); //DEBUG
 		myAgent.addBehaviour(new RevisarPeticiones(miAgente));
 	}
 }

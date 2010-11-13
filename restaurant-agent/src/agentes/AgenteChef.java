@@ -1,6 +1,7 @@
 package agentes;
 
 import util.AdministradorDF;
+import util.Debug;
 
 import comportamientos.BuscaAgentesParaChef;
 
@@ -15,7 +16,7 @@ public class AgenteChef extends Agent{
 	protected void setup(){
 		addBehaviour(new BuscaAgentesParaChef(this));
 		AdministradorDF.daDeAlta(this, "AgenteChef", "AgenteChef");	
-		System.out.println("Chef creado.");
+		Debug.print("Chef creado.");
 	}
 
 }

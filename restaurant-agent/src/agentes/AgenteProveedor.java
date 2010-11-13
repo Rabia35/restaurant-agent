@@ -4,6 +4,7 @@ import comportamientos.BuscaAgentesParaProveedor;
 
 import sql.Ingrediente;
 import util.AdministradorDF;
+import util.Debug;
 import jade.core.AID;
 import jade.core.Agent;
 
@@ -19,6 +20,6 @@ public class AgenteProveedor extends Agent {
 		addBehaviour(new BuscaAgentesParaProveedor(this));
 		AdministradorDF.daDeAlta(this, "AgenteProveedor", "AgenteProveedor");	
 		agentesBodegos= null;
-		System.out.println("Proveedor creado.");
+		Debug.print("Proveedor creado.");
 	}
 }
