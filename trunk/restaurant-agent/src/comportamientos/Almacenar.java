@@ -24,71 +24,98 @@ public class Almacenar extends TickerBehaviour {
 	
 	@Override
 	protected void onTick() {
-		if(estoyEnZonaPaquetes()){
-			ingredienteRecogido = true;
-		}
-		if(ingredienteRecogido && miAgente.ingredientePorAlmacenar!=null){
-			if(metaX==0){
-				metaX = estante.posicionX+1;
-				metaY = estante.posicionY;
-			}
-			ir();
-		}else{
-			if(metaX != 2){
-				metaX = 2;
-				metaY = 5 + miAgente.tipo.ordinal();
-			}
-			regresar();
-		}
-	}
-	
-	private void ir(){
-		if(subir()) return;
-		if(izquierda())return;
-		if(bajar()) return;
-		estante.ponerIngrediente(miAgente.ingredientePorAlmacenar);
-		miAgente.ingredientePorAlmacenar=null;
-	}
-	
-	private void regresar(){
-		if(subir()) return;
-		if(derecha())return;
-		if(bajar()) return;
 		if(ingredienteRecogido){
-			this.stop();
+			if(miAgente.ingredientePorAlmacenar!=null){
+				asignaMetas();
+				ir();
+			}else{
+				regresar();
+			}
+		}else{
+			if(estoyEnZonaPaquetes()){
+				ingredienteRecogido = true;
+				miAgente.cargando = miAgente.ingredientePorAlmacenar.clave;
+				miAgente.actualizarArchivoDeAgente();
+			}else{
+				regresar();//tengo otro estante
+			}
 		}
 	}
 	
+	private void asignaMetas(){
+		if(metaY==estante.posicionY)return;
+		metaY = estante.posicionY;
+		if(estante.refrigerador)
+			metaX = estante.posicionX-1;
+		else
+			metaX = estante.posicionX+1;
+	}
 	private boolean estoyEnZonaPaquetes(){
 		return miAgente.getX()==2 && miAgente.getY()==5 + miAgente.tipo.ordinal();
 	}
 	
-	private boolean subir(){
-		if(miAgente.getY()!=metaY && miAgente.getX()<metaX+miAgente.tipo.ordinal()+1){
+	private void ir(){
+		if(subirACarrilEstante()) return;
+		if(acercarseAMetaY())return;
+		if(acercarseAMetaX())return;
+		estante.ponerPaquete(miAgente.ingredientePorAlmacenar);
+		miAgente.ingredientePorAlmacenar=null;
+		miAgente.cargando = "";
+	}
+	
+	private void regresar(){
+		if(metaX != 2){
+			metaX = 2;
+			metaY = 5 + miAgente.tipo.ordinal();
+		}
+		if(moverseACarrilEstante())return;
+		if(acercarseAMetaY())return;
+		if(acercarseAMetaX())return;
+		if(ingredienteRecogido){
+			miAgente.job = null;
+			this.stop();
+		}
+	}
+	
+	
+	private boolean subirACarrilEstante(){
+		if(miAgente.getY()!=metaY && miAgente.getX() < estante.obtenerCarrilCercano(miAgente.tipo)){
 			miAgente.setX(miAgente.getX()+1);
 			return true;
-		}	
-		return false;
-	}
-	private boolean izquierda(){
-		if(miAgente.getY()>metaY){
-			miAgente.setY(miAgente.getY()-1);
-			return true;
 		}
 		return false;
 	}
-	private boolean bajar(){
-		if(miAgente.getX()>metaX){
+	
+	private boolean moverseACarrilEstante(){
+		if(miAgente.getY() == metaY || miAgente.obtenerCarrilCercano() == miAgente.getX())
+			return false;
+		if(miAgente.getY()!=metaY && miAgente.obtenerCarrilCercano() > miAgente.getX())
+			miAgente.setX(miAgente.getX()+1);
+		if(miAgente.getY()!=metaY && miAgente.obtenerCarrilCercano() < miAgente.getX())
 			miAgente.setX(miAgente.getX()-1);
+		return true;
+	}
+	
+	private boolean acercarseAMetaX(){
+		if(miAgente.getX()!=metaX){
+			if(miAgente.getX()>metaX)
+				miAgente.setX(miAgente.getX()-1);
+			else
+				miAgente.setX(miAgente.getX()+1);
+			return true;
+			}
+		return false;
+	}
+	
+	private boolean acercarseAMetaY(){
+		if(miAgente.getY()!=metaY){
+			if(miAgente.getY()>metaY)
+				miAgente.setY(miAgente.getY()-1);
+			else
+				miAgente.setY(miAgente.getY()+1);
 			return true;
 		}
 		return false;
 	}
-	private boolean derecha(){
-		if(miAgente.getY()<metaY){
-			miAgente.setY(miAgente.getY()+1);
-			return true;
-		}
-		return false;
-	}
+	
 }

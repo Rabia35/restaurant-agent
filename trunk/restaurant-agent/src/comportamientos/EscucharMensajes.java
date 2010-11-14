@@ -42,15 +42,22 @@ public class EscucharMensajes extends TickerBehaviour {
 	private void responderAChef(ACLMessage msg){
 		String[]content = msg.getContent().split("#", 2);
 		Ingrediente ingredienteSolicitado= Ingrediente.obtenerIngrediente(content[0]);
-		if(ingredienteSolicitado.peso*Integer.parseInt(content[1])<=miAgente.fuerza){
-			Mensaje.mandaMensaje(miAgente, Performativas.CONFIRMAR, miAgente.chef, "");
-			miAgente.enContratacion=true;
-			myAgent.addBehaviour(new ConcretarContratacion(miAgente,System.currentTimeMillis()+2000L));
+		int cantidad = Integer.parseInt(content[1]);
+		if(ingredienteSolicitado.peso*cantidad<=miAgente.fuerza){
+			if(ingredienteSolicitado.hayEnAlmacenSuficientes(cantidad,miAgente.altura)){
+				Mensaje.mandaMensaje(miAgente, Performativas.CONFIRMAR, miAgente.chef, "");
+				miAgente.enContratacion=true;
+				myAgent.addBehaviour(new ConcretarContratacion(miAgente,System.currentTimeMillis()+2000L));	
+			}else{
+				Debug.print(miAgente.getLocalName()+" no puede recoger todos los ingredientes");
+			}
+		}else{
+			Debug.print(miAgente.getLocalName()+" no puede cargar los ingredientes");
 		}
 	}
 	
 	private void responderAProveedor(ACLMessage msg){
-		Debug.print("Respondiendo a proveedor"+myAgent.getLocalName());
+		Debug.print(myAgent.getLocalName()+ " respondiendo a proveedor");
 		Ingrediente ingredienteSolicitado= Ingrediente.obtenerIngrediente(msg.getContent());
 		Estante estante;
 		if(ingredienteSolicitado.refrigerado){
