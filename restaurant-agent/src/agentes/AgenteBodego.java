@@ -7,6 +7,7 @@ import comportamientos.EscucharMensajes;
 
 import jade.core.AID;
 import jade.core.Agent;
+import jade.core.behaviours.Behaviour;
 import sql.Ingrediente;
 import util.AdministradorDF;
 import util.Debug;
@@ -21,6 +22,7 @@ public class AgenteBodego extends Agent {
 	public Pedido ingredientePorLlevar = null;
 	public Ingrediente ingredientePorAlmacenar = null;
 	public boolean enContratacion = false;
+	public Behaviour job;
 	
 	public Tipo tipo;
 	public int fuerza;
@@ -31,6 +33,8 @@ public class AgenteBodego extends Agent {
 	
 	private int x;
 	private int y;
+	
+	public String cargando = "";
 	
 	protected void setup(){
 		fuerza=350;
@@ -51,31 +55,35 @@ public class AgenteBodego extends Agent {
 	
 	public void setX(int x){
 		this.x=x;
-		try{
-			PrintWriter wr = new PrintWriter(tipo.name()+".txt");
-			wr.print(x + " " +y);
-			wr.close();
-		}catch(IOException e){
-			Debug.print("Problema al actualizar la posición en el archivo del agente "+tipo.name());
-		}
+		actualizarArchivoDeAgente();
 	}
 	
 	public void setY(int y){
 		this.y=y;
+		actualizarArchivoDeAgente();
+	}
+	public void actualizarArchivoDeAgente(){
 		try{
 			PrintWriter wr = new PrintWriter(tipo.name()+".txt");
-			wr.print(x + " " +y);
+			wr.print(x + " " + y + " " + cargando);
 			wr.close();
 		}catch(IOException e){
-			Debug.print("Problema al actualizar la posición en el archivo del agente "+tipo.name());
+			Debug.print("Problema al actualizar el archivo del agente "+tipo.name());
 		}
 	}
-	
+
 	public int getX(){
 		return x;
 	}
 	
 	public int getY(){
 		return y;
+	}
+	public int obtenerCarrilCercano(){
+		if(getX()<7)
+			return 3 + tipo.ordinal();
+		if(getX()<13)
+			return 9 + tipo.ordinal();
+		return 15 + tipo.ordinal();
 	}
 }

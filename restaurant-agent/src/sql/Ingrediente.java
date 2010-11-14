@@ -52,13 +52,19 @@ public class Ingrediente
 	
 	public boolean hayEnAlmacenSuficientes(int cantidad)
 	{
+		return hayEnAlmacenSuficientes(cantidad,3);
+	}
+	
+	public boolean hayEnAlmacenSuficientes(int cantidad, int altura)
+	{
 		try
 		{
 			BaseDeDatos bd = new BaseDeDatos();			
 			bd.conectar();
 			
 			ResultSet rs = bd.realizarQuery(" select sum(cantidad) as suma from estante where ingrediente = " +
-					                          NoSQLInjection.comillas(clave));
+					                          NoSQLInjection.comillas(clave)+
+					                          " and altura<="+altura);
 			rs.next();			
 			Integer suma = rs.getInt("suma"); 						
 			bd.desconectar();
@@ -74,6 +80,7 @@ public class Ingrediente
 		
 		return false;
 	}
+	
 	
 	@Override
  	public String toString() {

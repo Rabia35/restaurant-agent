@@ -35,15 +35,19 @@ public class ConcretarContratacion extends MsgReceiver{
 	protected void handleMessage(ACLMessage msg) {
 		miAgente.enContratacion=false;
 		if(msg!=null){
+			if(miAgente.job!=null)
+				myAgent.removeBehaviour(miAgente.job);
 			if(msg.getSender().equals(miAgente.chef)){
 				String[]content = msg.getContent().split("#", 2);
 				miAgente.ingredientePorLlevar = new Pedido(content[0],Integer.parseInt(content[1]));
-				//addBehaviour(new Llevar(this));
+				miAgente.job = new Llevar(miAgente);
+				myAgent.addBehaviour(miAgente.job);
 			}
 			if(msg.getSender().equals(miAgente.proveedor)){
 				miAgente.ingredientePorAlmacenar = Ingrediente.obtenerIngrediente(msg.getContent());
 				Debug.print(miAgente.getLocalName()+" almacenando "+miAgente.ingredientePorAlmacenar.nombre);
-				myAgent.addBehaviour(new Almacenar(miAgente,estante));
+				miAgente.job = new Almacenar(miAgente,estante);
+				myAgent.addBehaviour(miAgente.job);
 			}
 		}else if(estante!=null){
 			Estante.liberarEstante(estante.posicionX, estante.posicionY, estante.altura);

@@ -3,6 +3,8 @@ package sql;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
 
+import agentes.AgenteBodego;
+
 import util.*;
 
 public class Estante 
@@ -12,7 +14,7 @@ public class Estante
 	public int altura;
 	public boolean refrigerador;		
 	
-	public Ingrediente ingrediente;
+	public Ingrediente ingrediente;	
 	public Timestamp fechaColocado;
 	public int cantidad;
 		
@@ -38,12 +40,9 @@ public class Estante
 			est.altura = altura;
 			est.refrigerador = rs.getBoolean("refrigerador");
 			est.ingrediente = Ingrediente.obtenerIngrediente(rs.getString("ingrediente"));
+			est.fechaColocado = rs.getTimestamp("fechaColocado");
+			est.cantidad = rs.getInt("cantidad");
 			
-			if (est.ingrediente != null)
-			{			
-				est.fechaColocado = rs.getTimestamp("fechaColocado");
-				est.cantidad = rs.getInt("cantidad");
-			}
 			
 			bd.desconectar();
 		}catch(Exception e)
@@ -54,23 +53,47 @@ public class Estante
 		return est;
 	}
 	
-	public Ingrediente retirarIngrediente(int cantidad)
+	public static Estante obtenerEstante(Ingrediente ingrediente, int altura){
+		Estante est = null;
+		
+		try
+		{
+			BaseDeDatos bd = new BaseDeDatos();
+			
+			bd.conectar();
+			
+			ResultSet rs = bd.realizarQuery(" select * from estante where altura <= " + altura+
+											" and ingrediente="+ingrediente.clave+
+											" order by altura desc");
+			
+			if(rs.first()){
+				est = new Estante();									
+				est.posicionX = rs.getInt("posicionX");
+				est.posicionY = rs.getInt("posicionY");
+				est.altura = rs.getInt("altura");
+				est.refrigerador = rs.getBoolean("refrigerador");
+				est.ingrediente = ingrediente;
+				est.fechaColocado = rs.getTimestamp("fechaColocado");
+				est.cantidad = rs.getInt("cantidad");
+			}else{
+				return null;
+			}
+			bd.desconectar();
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+		return est;
+	}
+	
+	public void retirarIngrediente(int cantidad)
 	{
 		if(ingrediente == null)
-			return null;
+			return;
 		
 		if(cantidad > this.cantidad)
 			cantidad = this.cantidad;
-		
-		Ingrediente sacado = new Ingrediente();
-		
-		sacado.clave = ingrediente.clave;
-		sacado.nombre = ingrediente.nombre;
-		sacado.costo = ingrediente.costo;
-		sacado.peso = ingrediente.peso;
-		sacado.refrigerado = ingrediente.refrigerado;			
-		sacado.caducidad = ingrediente.caducidad;
-		sacado.cantidadPorPaquete = ingrediente.cantidadPorPaquete;
 		
 		this.cantidad -= cantidad;
 		
@@ -83,6 +106,7 @@ public class Estante
 					         " and posicionY = " +  posicionY + 
 					         " and altura = " + altura);
 			ingrediente = null;
+			fechaColocado = null;
 		}
 		else
 			bd.ejectuarDML(" update estante set cantidad = " + this.cantidad + 
@@ -90,10 +114,10 @@ public class Estante
 			         " and posicionY = " +  posicionY + 
 			         " and altura = " + altura);
 		
-		return sacado;
 	}
 	
-	public void ponerIngrediente(Ingrediente ing)
+	
+	public void ponerPaquete(Ingrediente ing)
 	{		
 		if(ingrediente != null)
 			return;
@@ -109,6 +133,32 @@ public class Estante
 				         " where posicionX = " + posicionX + 
 				         " and posicionY = " +  posicionY + 
 				         " and altura = " + altura);
+	}
+	
+	
+	public int obtenerLugaresDisponibles(){
+		int disponibles = 0;
+		try
+		{
+			BaseDeDatos bd = new BaseDeDatos();
+			
+			bd.conectar();
+			
+			ResultSet rs = bd.realizarQuery(" select "+ingrediente.cantidadPorPaquete+"-cantidad from estante"+
+											"where altura = " + altura+
+											"and posicionX = "+ posicionX + 
+											"and posicionY = "+ posicionY);
+			
+			rs.first();
+			disponibles = rs.getInt(1);				
+			
+			bd.desconectar();
+			
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return disponibles;
 	}
 	
 	public static Estante apartarEstanteLibre(int altura)
@@ -159,35 +209,21 @@ public class Estante
 		}
 		
 		return est;
-	}	
+	}
 	
-	public static Estante liberarEstante(int x, int y, int altura)
+	public static void liberarEstante(int x, int y, int altura)
 	{
-		Estante est = null;
-		
-		try
-		{
-			BaseDeDatos bd = new BaseDeDatos();
-			
-			bd.conectar();
-			
-			bd.ejectuarDML(" update estante set ingrediente = null , " + 
+		BaseDeDatos bd = new BaseDeDatos();
+		bd.ejectuarDML(" update estante set ingrediente = null , " + 
 			         " where posicionX = " + x + 
 			         " and posicionY = " +  y + 
 			         " and altura = " + altura);
-			
-			bd.desconectar();
-		}catch(Exception e)
-		{
-			e.printStackTrace();
-		}
-		
-		return est;
+
 	}
 	
 	public static void vaciaTodo(){
 		BaseDeDatos bd = new BaseDeDatos();
-		bd.ejectuarDML(" update estante set ingrediente = null");
+		bd.ejectuarDML(" update estante set ingrediente = null, fechaColocado=null, cantidad=0");
 	}
 	@Override
 	public String toString() {
@@ -202,4 +238,10 @@ public class Estante
 		return s;
 	}
 
+	public int obtenerCarrilCercano(AgenteBodego.Tipo tipo){
+		if(!refrigerador)
+			return posicionX+tipo.ordinal()+2;
+		else
+			return posicionX+tipo.ordinal()-4;
+	}
 }
