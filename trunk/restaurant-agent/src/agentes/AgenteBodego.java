@@ -3,7 +3,7 @@ package agentes;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import comportamientos.EscucharMensajes;
+import comportamientos.BuscaAgentesParaBodego;
 
 import jade.core.AID;
 import jade.core.Agent;
@@ -47,9 +47,7 @@ public class AgenteBodego extends Agent {
 		setX(2);
 		setY(5 + tipo.ordinal());
 		AdministradorDF.daDeAlta(this, "AgenteBodego", "AgenteBodego"+tipo.name());
-		//chef = AdministradorDF.encuentraAgentes(this, "AgenteChef")[0];
-		proveedor = AdministradorDF.encuentraAgentes(this, "AgenteProveedor")[0];
-		addBehaviour(new EscucharMensajes(this));
+		addBehaviour(new BuscaAgentesParaBodego(this));
 		Debug.print("Bodego "+tipo.name()+" creado.");
 	}
 	
