@@ -50,7 +50,7 @@ create table peticion(
    ingrediente char(5) not null primary key,
    hora datetime);
 
-create table pedidos(
+create table pedido(
    clave int not null auto_increment primary key,
    receta char(5),
    tiempoPedido datetime);

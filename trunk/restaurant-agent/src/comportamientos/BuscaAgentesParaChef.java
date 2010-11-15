@@ -22,6 +22,7 @@ public class BuscaAgentesParaChef  extends WakerBehaviour
 	@Override
 	protected void onWake() {
 		super.onWake();
+		miAgente.addBehaviour(new PidePlatillos(miAgente));
 		miAgente.agentesBodegos = AdministradorDF.encuentraAgentes(miAgente, "AgenteBodego");
 		Debug.print("Agentes Bodegos agregados para Chef"); //DEBUG
 	}

@@ -45,7 +45,7 @@ public class EscucharMensajes extends TickerBehaviour {
 		int cantidad = Integer.parseInt(content[1]);
 		if(ingredienteSolicitado.peso*cantidad<=miAgente.fuerza){
 			if(ingredienteSolicitado.hayEnAlmacenSuficientes(cantidad,miAgente.altura)){
-				Mensaje.mandaMensaje(miAgente, Performativas.CONFIRMAR, miAgente.chef, "");
+				Mensaje.mandaMensaje(msg.getConversationId(), miAgente, Performativas.CONFIRMAR, miAgente.chef, "");
 				miAgente.enContratacion=true;
 				myAgent.addBehaviour(new ConcretarContratacion(miAgente,System.currentTimeMillis()+2000L));	
 			}else{
