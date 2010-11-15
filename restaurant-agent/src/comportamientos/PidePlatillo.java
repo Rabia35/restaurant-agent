@@ -2,6 +2,7 @@ package comportamientos;
 
 import java.util.Random;
 
+import sql.Pedido;
 import sql.Receta;
 
 import agentes.AgenteChef;
@@ -34,16 +35,15 @@ public class PidePlatillo extends TickerBehaviour
 	{
 		Random r = new Random();
 		int cual = r.nextInt(chef.menu.recetas.length);
-	
-		pideIngredientes(chef.menu.recetas[cual]);
 		
-		this.stop();
+		pideIngredientes(chef.menu.recetas[cual]);
 	}
 	
 	private void pideIngredientes(Receta cual)
 	{
+		Pedido.agregarPlatillo(cual);
+		
 		for (int i = 0; i < cual.ingredientes.length; i++)
 			chef.negociaIngrediente(cual.ingredientes[i], cual.cantidadIngrediente[i]);
 	}
-
 }
