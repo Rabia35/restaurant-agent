@@ -76,3 +76,6 @@ insert into ingrediente (clave, nombre, peso, costo, refrigerado, caducidad, can
 insert into ingrediente (clave, nombre, peso, costo, refrigerado, caducidad, cantidadPorPaquete)
    values ('cblla', 'Cebolla', 75, 0, 0, 0, 8);   
 
+insert into ingrediente (clave, nombre, peso, costo, refrigerado, caducidad, cantidadPorPaquete)
+   values ('crema', 'Crema', 12, 0, 1, 0, 1);   
+
