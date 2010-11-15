@@ -31,7 +31,7 @@ public class AgenteChef extends Agent{
 
 	public void negociaIngrediente(Ingrediente ing, int cuantos)
 	{
-		negociaIngrediente(ing, cuantos, "Ingrediente: " + idConversacion, 1);
+		negociaIngrediente(ing, cuantos, "Ingrediente: " + idConversacion, 0);
 		idConversacion++;
 	}
 	

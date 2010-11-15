@@ -63,7 +63,7 @@ public class Estante
 			bd.conectar();
 			
 			ResultSet rs = bd.realizarQuery(" select * from estante where altura <= " + altura+
-											" and ingrediente="+ingrediente.clave+
+											" and ingrediente="+ NoSQLInjection.comillas(ingrediente.clave)+
 											" order by altura desc");
 			
 			if(rs.first()){
