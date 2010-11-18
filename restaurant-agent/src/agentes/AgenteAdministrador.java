@@ -13,7 +13,7 @@ public class AgenteAdministrador extends Agent
 {
 	private static final long serialVersionUID = 4122529638717525303L;
 	
-	public final int totalAgentesMenu = 3;
+	public final static int totalAgentesMenu = 3;
 	
 	public Menu menu;
 	public AID[] agentesMenu;
