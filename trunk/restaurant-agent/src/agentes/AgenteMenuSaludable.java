@@ -16,7 +16,7 @@ public class AgenteMenuSaludable extends AgenteMenu
 	@Override
 	public void escogeRecetas() 
 	{
-		String[][] recetas = Receta.obtenerRecetasSaludables();
+		recetas = Receta.obtenerRecetasSaludables();
 		String rFinal = "";
 		int t = 0;
 		
