@@ -24,6 +24,7 @@ public class AgenteCreador extends Agent
 			AgentController b3 = c.createNewAgent("AgenteBodegoAlto", "agentes.AgenteBodegoAlto",null);			
 			AgentController m1 = c.createNewAgent("AgenteMenuCodicioso", "agentes.AgenteMenuCodicioso",null);
 			AgentController m2 = c.createNewAgent("AgenteMenuSaludable", "agentes.AgenteMenuSaludable",null);
+			AgentController m3 = c.createNewAgent("AgenteMenuPrudente", "agentes.AgenteMenuPrudente",null);
 			a.start();
 			p.start();
 			ch.start();
@@ -32,6 +33,7 @@ public class AgenteCreador extends Agent
 			b3.start();
 			m1.start();
 			m2.start();
+			m3.start();
 		} catch (StaleProxyException e) {
 			e.printStackTrace();
 		}		
