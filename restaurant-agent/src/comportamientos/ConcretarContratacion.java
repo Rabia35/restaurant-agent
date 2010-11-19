@@ -40,6 +40,7 @@ public class ConcretarContratacion extends MsgReceiver{
 			if(msg.getSender().equals(miAgente.chef)){
 				String[]content = msg.getContent().split("#", 2);
 				miAgente.ingredientePorLlevar = new Pedido(content[0],Integer.parseInt(content[1]));
+				Debug.print(miAgente.getLocalName()+" recogiendo "+miAgente.ingredientePorLlevar.getIngrediente().nombre);
 				miAgente.job = new Llevar(miAgente);
 				myAgent.addBehaviour(miAgente.job);
 			}

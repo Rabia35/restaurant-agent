@@ -9,7 +9,7 @@ public class BuscaAgentesParaBodego extends WakerBehaviour{
 	
 	private static final long serialVersionUID = -6302492289973932593L;
 
-	private static final long tiempoDespertar = 2000;
+	private static final long tiempoDespertar = 3000;
 	
 	AgenteBodego miAgente;
 	

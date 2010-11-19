@@ -66,11 +66,11 @@ public class Llevar extends TickerBehaviour{
 			return;
 		}
 		if(estante.cantidad > miAgente.ingredientePorLlevar.getCantidad()){
+			cantidadRecogida += miAgente.ingredientePorLlevar.getCantidad();
 			estante.retirarIngrediente(miAgente.ingredientePorLlevar.getCantidad());
-			cantidadRecogida = miAgente.ingredientePorLlevar.getCantidad();
 		}else{
+			cantidadRecogida += estante.cantidad;
 			estante.retirarIngrediente(estante.cantidad);
-			cantidadRecogida = estante.cantidad;
 		}
 		estante = null;
 		miAgente.cargando = miAgente.ingredientePorLlevar.getIngrediente().clave;
@@ -89,7 +89,7 @@ public class Llevar extends TickerBehaviour{
 		}
 		miAgente.cargando="";
 		miAgente.ingredientePorLlevar=null;
-		//Dibujar en zona de entrega / mandar mensaje al chef
+		//Dibujar en zona de entrega
 	}
 	
 	private void regresar(){
@@ -122,7 +122,7 @@ public class Llevar extends TickerBehaviour{
 			miAgente.setX(miAgente.getX()+1);
 		else
 			miAgente.setX(miAgente.getX()-1);
-		if(miAgente.getX()==miAgente.obtenerCarrilCercano()){ banderita=false;}
+		if(miAgente.getX()==estante.obtenerCarrilCercano(miAgente.tipo)){ banderita=false;}
 	}
 	private void acercarseAMetaY(){
 		if(miAgente.getY()>metaY)

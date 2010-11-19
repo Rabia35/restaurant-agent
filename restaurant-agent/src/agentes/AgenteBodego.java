@@ -37,7 +37,7 @@ public class AgenteBodego extends Agent {
 	public String cargando = "";
 	
 	protected void setup(){
-		fuerza=350;
+		fuerza=450;
 		altura=2;
 		setup(Tipo.Normal);
 	}
@@ -47,7 +47,7 @@ public class AgenteBodego extends Agent {
 		setX(2);
 		setY(5 + tipo.ordinal());
 		AdministradorDF.daDeAlta(this, "AgenteBodego", "AgenteBodego"+tipo.name());
-		//addBehaviour(new BuscaAgentesParaBodego(this));
+		addBehaviour(new BuscaAgentesParaBodego(this));
 		Debug.print("Bodego "+tipo.name()+" creado.");
 	}
 	
@@ -63,7 +63,9 @@ public class AgenteBodego extends Agent {
 	public void actualizarArchivoDeAgente(){
 		try{
 			PrintWriter wr = new PrintWriter(tipo.name()+".txt");
-			wr.print(x + " " + y + " " + cargando);
+			wr.println(x);
+			wr.println(y);
+			wr.println(cargando);
 			wr.close();
 		}catch(IOException e){
 			Debug.print("Problema al actualizar el archivo del agente "+tipo.name());

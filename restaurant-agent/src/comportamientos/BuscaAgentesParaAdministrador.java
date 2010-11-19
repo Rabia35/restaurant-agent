@@ -8,7 +8,7 @@ import jade.core.behaviours.WakerBehaviour;
 public class BuscaAgentesParaAdministrador extends WakerBehaviour
 {
 	private static final long serialVersionUID = -7346855023302739824L;
-	private static final long tiempoDespertar = 2000;
+	private static final long tiempoDespertar = 3000;
 	
 	AgenteAdministrador miAgente;
 	

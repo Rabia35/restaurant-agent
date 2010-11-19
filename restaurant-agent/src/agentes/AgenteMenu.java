@@ -1,6 +1,7 @@
 package agentes;
 
 import comportamientos.BuscaAgentesParaMenu;
+import comportamientos.SugerirAMenus;
 
 import sql.Menu;
 import util.AdministradorDF;
@@ -20,7 +21,7 @@ public abstract class AgenteMenu extends Agent
 	protected Menu menu;
 	
 	protected String[][] recetas;
-
+	
 	public void setup() 
 	{ 		
 		AdministradorDF.daDeAlta(this, "AgenteMenu", tipo.name());
@@ -60,7 +61,7 @@ public abstract class AgenteMenu extends Agent
 	public void negociaMenu(String propuesta)
 	{
 		Debug.print(propuesta);
-		//Aqui añadir behaviour de negociación
+		addBehaviour(new SugerirAMenus(this, propuesta));
 	}
 	
 	public void procesaRecetas()

@@ -8,7 +8,7 @@ import jade.core.behaviours.WakerBehaviour;
 public class BuscaAgentesParaMenu extends WakerBehaviour
 {
 	private static final long serialVersionUID = 6027000758430690937L;
-	private static final long tiempoDespertar = 2000;
+	private static final long tiempoDespertar = 3000;
 	
 	public AgenteMenu miAgente; 
 	

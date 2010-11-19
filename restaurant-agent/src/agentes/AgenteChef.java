@@ -24,7 +24,7 @@ public class AgenteChef extends Agent{
 	
 	protected void setup(){		
 		menu = Menu.obtenerMenu();		
-		//addBehaviour(new BuscaAgentesParaChef(this));		
+		addBehaviour(new BuscaAgentesParaChef(this));		
 		AdministradorDF.daDeAlta(this, "AgenteChef", "AgenteChef");	
 		Debug.print("Chef creado.");
 	}

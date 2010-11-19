@@ -23,13 +23,19 @@ public class PidePlatillo extends TickerBehaviour
 		chef = a;
 	}
 
+	
+	
 	@Override
 	protected void onTick() 
 	{
-		Random r = new Random();
 		
-		if (r.nextInt(10) < probabilidadPedir)
-			pideReceta();
+		if(chef.menu.recetas.length>0){
+			Random r = new Random();
+		
+			if (r.nextInt(10) < probabilidadPedir)
+				pideReceta();
+		}
+		
 	}
 	
 	private void pideReceta()
