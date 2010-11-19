@@ -3,10 +3,10 @@ Content\piso.xnb
 Content\Llegada.xnb
 Content\Salida.xnb
 Content\Bodego.xnb
-Content\font.xnb
 Content\Bajo.xnb
 Content\caja21.xnb
 Content\caja32.xnb
 Content\caja42.xnb
 Content\Medio.xnb
 Content\Alto.xnb
+Content\font.xnb
