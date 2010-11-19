@@ -22,6 +22,7 @@ public class AgenteAdministrador extends Agent
 	@Override
 	protected void setup() 
 	{		
+		//addBehaviour(new CreaPeticionesRandom(this));
 		addBehaviour(new BuscaAgentesParaAdministrador(this));
 		AdministradorDF.daDeAlta(this, "AgenteAdministrador", "AgenteAdministrador");	
 		agentesMenu = null;

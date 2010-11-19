@@ -8,7 +8,7 @@ import agentes.AgenteChef;
 public class BuscaAgentesParaChef extends WakerBehaviour
 {	
 	private static final long serialVersionUID = -4372536552672850791L;
-	private static final long tiempoDespertar = 2000;
+	private static final long tiempoDespertar = 3000;
 	
 	AgenteChef miAgente;
 	

@@ -9,7 +9,7 @@ import comportamientos.RevisarPeticiones;
 public class BuscaAgentesParaProveedor extends WakerBehaviour{
 	
 	private static final long serialVersionUID = -3133208435934406627L;
-	private static final long tiempoDespertar = 2000;
+	private static final long tiempoDespertar = 3000;
 	
 	AgenteProveedor miAgente;
 	
