@@ -13,6 +13,7 @@ public class Ingrediente
 	public boolean refrigerado;
 	public int caducidad;
 	public int cantidadPorPaquete;
+	public boolean saludable;
 	
 	public static Ingrediente obtenerIngrediente(String clave)
 	{
@@ -39,7 +40,8 @@ public class Ingrediente
 			ing.peso = rs.getInt("peso");
 			ing.refrigerado = rs.getBoolean("refrigerado");			
 			ing.caducidad = rs.getInt("caducidad");
-			ing.cantidadPorPaquete = rs.getInt("cantidadPorPaquete");			
+			ing.cantidadPorPaquete = rs.getInt("cantidadPorPaquete");
+			ing.saludable = rs.getBoolean("saludable");
 			
 			bd.desconectar();
 		}catch(Exception e)

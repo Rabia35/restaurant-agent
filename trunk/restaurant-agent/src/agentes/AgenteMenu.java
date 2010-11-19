@@ -2,7 +2,9 @@ package agentes;
 
 import comportamientos.BuscaAgentesParaMenu;
 
+import sql.Menu;
 import util.AdministradorDF;
+import util.Debug;
 import util.TipoMenu;
 import jade.core.AID;
 import jade.core.Agent;
@@ -10,15 +12,15 @@ import jade.core.Agent;
 public abstract class AgenteMenu extends Agent
 {
 	private static final long serialVersionUID = -8641471475205022401L;
-	private String recetas[];
+	protected static final int PROPUESTAS_POR_MENU = 3;
 	public TipoMenu tipo;
 	
 	public AID[] menus;
-	public AID administrador;
+	public AID administrador;	
+	protected Menu menu;
 
 	public void setup() 
 	{ 		
-		recetas = new String[AgenteAdministrador.totalAgentesMenu * AgenteAdministrador.totalAgentesMenu];
 		AdministradorDF.daDeAlta(this, "AgenteMenu", tipo.name());
 		addBehaviour(new BuscaAgentesParaMenu(this));
 	}
@@ -38,5 +40,24 @@ public abstract class AgenteMenu extends Agent
 		}
 		
 		menus = nuevos;
+	}
+	
+	protected void cargaMenu()
+	{
+		menu = Menu.obtenerMenu();
+	}
+	
+	protected boolean estaEnMenu(String clave)
+	{
+		for (int i = 0; i < menu.recetas.length; i++)
+			if (menu.recetas[i].clave.equals(clave))
+				return true;
+		return false;
+	}
+	
+	public void negociaMenu(String propuesta)
+	{
+		Debug.print(propuesta);
+		//Aqui añadir behaviour de negociación
 	}
 }

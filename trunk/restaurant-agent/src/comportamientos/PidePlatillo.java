@@ -2,6 +2,7 @@ package comportamientos;
 
 import java.util.Random;
 
+import sql.Menu;
 import sql.Pedido;
 import sql.Receta;
 
@@ -34,6 +35,9 @@ public class PidePlatillo extends TickerBehaviour
 	private void pideReceta()
 	{
 		Random r = new Random();
+		
+		chef.menu = Menu.obtenerMenu();
+		
 		int cual = r.nextInt(chef.menu.recetas.length);
 		
 		pideIngredientes(chef.menu.recetas[cual]);
