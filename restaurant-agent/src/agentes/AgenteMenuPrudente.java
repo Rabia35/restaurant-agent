@@ -1,5 +1,6 @@
 package agentes;
 
+import sql.Receta;
 import util.TipoMenu;
 
 public class AgenteMenuPrudente extends AgenteMenu
@@ -15,7 +16,8 @@ public class AgenteMenuPrudente extends AgenteMenu
 	@Override
 	public void escogeRecetas() 
 	{	
-		
+		recetas = Receta.obtenerRecetasPrudentes();
+		procesaRecetas();
 	}
 
 }

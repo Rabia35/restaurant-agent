@@ -63,11 +63,30 @@ public abstract class AgenteMenu extends Agent
 		//Aqui añadir behaviour de negociación
 	}
 	
+	public void procesaRecetas()
+	{
+		String rFinal = "";
+		int t = 0;
+		
+		cargaMenu();
+		
+		for (int i = 0; i < recetas.length; i++)
+			if(!estaEnMenu(recetas[i][0]))
+			{
+				rFinal += recetas[i][0] + "#" + recetas[i][1] + "#";
+				t++;
+				if (t == PROPUESTAS_POR_MENU)
+					break;
+			}
+		
+		negociaMenu(rFinal);
+	}
+	
 	public String valorReceta(String receta)
 	{
 		for (int i = 0; i < recetas.length; i++)
 			if (recetas[i][0].equals(receta))
 				return recetas[i][1];
-		return "";
+		return "0";
 	}
 }

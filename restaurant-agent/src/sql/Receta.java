@@ -1,6 +1,7 @@
 package sql;
 
 import java.sql.ResultSet;
+
 import util.NoSQLInjection;
 
 public class Receta 
@@ -8,6 +9,7 @@ public class Receta
 	public static int MAX_INGREDIENTES = 4;
 	
 	private static int CONSTANTE_SALUDABLE = 20;
+	private static int CONSTANTE_CADUCA = 60;
 	
 	public String clave;
 	public String nombre;
@@ -110,30 +112,15 @@ public class Receta
 		}
 		return res;
 	}
-	
-	public static String[][] obtenerRecetasCaras()
+
+	private static String[][] obtenerRecetas (String query)
 	{
 		String[][] recetas = null;
-		try {
-			String validas = recetasPosibles();
-			
-			String s = " select * from (" + 
-			 " (select (i1.costo + i2.costo + i3.costo + i4.costo) as total, r.clave from receta as r " + 
-			 " inner join ingrediente as i1 on i1.clave = r.ingrediente1 " + 
-			 " inner join ingrediente as i2 on i2.clave = r.ingrediente2 " + 
-			 " inner join ingrediente as i3 on i3.clave = r.ingrediente3 " + 
-			 " inner join ingrediente as i4 on i4.clave = r.ingrediente4) union " + 
-			 " (select (i1.costo + i2.costo + i3.costo) as total, r.clave from receta as r " + 
-			 " inner join ingrediente as i1 on i1.clave = r.ingrediente1 " +
-			 " inner join ingrediente as i2 on i2.clave = r.ingrediente2 " + 
-			 " inner join ingrediente as i3 on i3.clave = r.ingrediente3)) as tmp " + 
-			 " where clave in " + validas + 
-			 " order by total desc";
-			
+		try {			
 			BaseDeDatos bd = new BaseDeDatos();			
 			bd.conectar();
 			
-			ResultSet rs = bd.realizarQuery(s);
+			ResultSet rs = bd.realizarQuery(query);
 			
 			rs.last();
 			recetas = new String[rs.getRow()][2];
@@ -152,53 +139,76 @@ public class Receta
 		{
 			e.printStackTrace();
 		}
-		return recetas; 
+		return recetas;	
+	}
+	
+	public static String[][] obtenerRecetasCaras()
+	{		
+		String validas = recetasPosibles();
+		
+		String s = " select * from (" + 
+		 " (select (i1.costo + i2.costo + i3.costo + i4.costo) as total, r.clave from receta as r " + 
+		 " inner join ingrediente as i1 on i1.clave = r.ingrediente1 " + 
+		 " inner join ingrediente as i2 on i2.clave = r.ingrediente2 " + 
+		 " inner join ingrediente as i3 on i3.clave = r.ingrediente3 " + 
+		 " inner join ingrediente as i4 on i4.clave = r.ingrediente4) union " + 
+		 " (select (i1.costo + i2.costo + i3.costo) as total, r.clave from receta as r " + 
+		 " inner join ingrediente as i1 on i1.clave = r.ingrediente1 " +
+		 " inner join ingrediente as i2 on i2.clave = r.ingrediente2 " + 
+		 " inner join ingrediente as i3 on i3.clave = r.ingrediente3)) as tmp " + 
+		 " where clave in " + validas + 
+		 " order by total desc";
+			
+		return obtenerRecetas(s);
 	}
 	
 	public static String[][] obtenerRecetasSaludables()
 	{
-		String[][] recetas = null;
-		try {
-			String validas = recetasPosibles();
-			
-			String s = " select * from (" + 
-			 " (select (i1.saludable + i2.saludable + i3.saludable + i4.saludable) * " + CONSTANTE_SALUDABLE +
-			 " as total, r.clave from receta as r " + 
-			 " inner join ingrediente as i1 on i1.clave = r.ingrediente1 " + 
-			 " inner join ingrediente as i2 on i2.clave = r.ingrediente2 " + 
-			 " inner join ingrediente as i3 on i3.clave = r.ingrediente3 " + 
-			 " inner join ingrediente as i4 on i4.clave = r.ingrediente4) union " + 
-			 " (select (i1.saludable + i2.saludable + i3.saludable) * " + CONSTANTE_SALUDABLE +
-			 " as total, r.clave from receta as r " + 
-			 " inner join ingrediente as i1 on i1.clave = r.ingrediente1 " +
-			 " inner join ingrediente as i2 on i2.clave = r.ingrediente2 " + 
-			 " inner join ingrediente as i3 on i3.clave = r.ingrediente3)) as tmp " + 
-			 " where clave in " + validas + 
-			 " order by total desc";
-			
-			BaseDeDatos bd = new BaseDeDatos();			
-			bd.conectar();
-			
-			ResultSet rs = bd.realizarQuery(s);
-			
-			rs.last();
-			recetas = new String[rs.getRow()][2];
-			rs.beforeFirst();
-			
-			int i = 0;
-			while(rs.next())
-			{
-				recetas[i][0] = rs.getString("clave");
-				recetas[i][1] = rs.getString("total");
-				i++;
-			}
-			
-			bd.desconectar();
-		} catch (Exception e) 
-		{
-			e.printStackTrace();
-		}
-		return recetas; 
+		String validas = recetasPosibles();
+		String s = " select * from (" + 
+		 " (select (i1.saludable + i2.saludable + i3.saludable + i4.saludable) * " + CONSTANTE_SALUDABLE +
+		 " as total, r.clave from receta as r " + 
+		 " inner join ingrediente as i1 on i1.clave = r.ingrediente1 " + 
+		 " inner join ingrediente as i2 on i2.clave = r.ingrediente2 " + 
+		 " inner join ingrediente as i3 on i3.clave = r.ingrediente3 " + 
+		 " inner join ingrediente as i4 on i4.clave = r.ingrediente4) union " + 
+		 " (select (i1.saludable + i2.saludable + i3.saludable) * " + CONSTANTE_SALUDABLE +
+		 " as total, r.clave from receta as r " + 
+		 " inner join ingrediente as i1 on i1.clave = r.ingrediente1 " +
+		 " inner join ingrediente as i2 on i2.clave = r.ingrediente2 " + 
+		 " inner join ingrediente as i3 on i3.clave = r.ingrediente3)) as tmp " + 
+		 " where clave in " + validas + 
+		 " order by total desc";
+		
+		return obtenerRecetas(s);
+	}
+	
+	public static String[][] obtenerRecetasPrudentes()
+	{
+		String subquery = 
+			"(select min(i.caducidad * " + CONSTANTE_CADUCA + 
+			" - (now() - fechaColocado)) as total, e.ingrediente from estante " +
+			" as e inner join ingrediente as i on i.clave = e.ingrediente " + 
+			"group by e.ingrediente order by total asc)";
+		
+		String s = " select * from ((select r.clave, ((500 * " + CONSTANTE_CADUCA + 
+		  " - t1.total) / (25 * " + CONSTANTE_CADUCA + ")) + ((500 * " + CONSTANTE_CADUCA + 
+		  " - t2.total) / (25 * " + CONSTANTE_CADUCA + ")) + ((500 * " + CONSTANTE_CADUCA + 
+		  " - t3.total) / (25 * " + CONSTANTE_CADUCA + ")) as total from receta as r " + 
+		  " inner join " + subquery + " as t1 on r.ingrediente1 = t1.ingrediente " + 
+		  " inner join " + subquery + " as t2 on r.ingrediente2 = t2.ingrediente " + 
+		  " inner join " + subquery + " as t3 on r.ingrediente3 = t3.ingrediente) union" + 
+		  " (select r.clave, ((500 * " + CONSTANTE_CADUCA + 
+		  " - t1.total) / (25 * " + CONSTANTE_CADUCA + ")) + ((500 * " + CONSTANTE_CADUCA + 
+		  " - t2.total) / (25 * " + CONSTANTE_CADUCA + ")) + ((500 * " + CONSTANTE_CADUCA + 
+		  " - t3.total) / (25 * " + CONSTANTE_CADUCA + ")) + ((500 * " + CONSTANTE_CADUCA + 
+		  " - t4.total) / (25 * " + CONSTANTE_CADUCA + ")) as total from receta as r " + 
+		  " inner join " + subquery + " as t1 on r.ingrediente1 = t1.ingrediente " + 
+		  " inner join " + subquery + " as t2 on r.ingrediente2 = t2.ingrediente " + 
+		  " inner join " + subquery + " as t3 on r.ingrediente3 = t3.ingrediente " +
+		  " inner join " + subquery + " as t4 on r.ingrediente4 = t4.ingrediente)) as tmp";		
+		
+		return obtenerRecetas(s);
 	}
 	
 	@Override
