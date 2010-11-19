@@ -203,46 +203,20 @@ namespace Restaurant_Agent
             */
            
 
-            txtAlto = new StreamReader("C:/Users/Zeraal/Desktop/Alto.txt");
-            txtMedio = new StreamReader("C:/Users/Zeraal/Desktop/Medio.txt");
-            txtBajo = new StreamReader("C:/Users/Zeraal/Desktop/Bajo.txt");
+            txtAlto = new StreamReader("D:\\Mis Documentos\\Tec\\Sistemas Multiagente\\restaurant-agent\\restaurant-agent\\Alto.txt");
+            txtMedio = new StreamReader("D:\\Mis Documentos\\Tec\\Sistemas Multiagente\\restaurant-agent\\restaurant-agent\\Normal.txt");
+            txtBajo = new StreamReader("D:\\Mis Documentos\\Tec\\Sistemas Multiagente\\restaurant-agent\\restaurant-agent\\Fuerte.txt");
 
-            // write a line of text to the file
-            textAlto  = txtAlto.ReadToEnd();
-            textMedio = txtMedio.ReadToEnd();
-            textBajo = txtBajo.ReadToEnd();
-
-            txtAlto.Close();
-            txtMedio.Close();
-            txtBajo.Close();
-
-            Altocharx = textAlto[0];
-            Mediocharx = textMedio[0];
-            Bajocharx = textBajo[0];
-
-            Altochar2x = textAlto[1];
-            Mediochar2x = textMedio[1];
-            Bajochar2x = textBajo[1];
-
-            Altochary = textAlto[3];
-            Mediochary = textMedio[3];
-            Bajochary = textBajo[3];
-
-           AltoX = MetodoX(Altocharx, Altochar2x);
-           AltoY = MetodoY(Altochary);
-           MedioX =MetodoX(Mediocharx, Mediochar2x);
-           MedioY =MetodoY(Mediochary);
-           BajoX=  MetodoX(Bajocharx, Bajochar2x);
-           BajoY = MetodoY(Bajochary);
+           AltoX = MetodoX(Int16.Parse(txtAlto.ReadLine()));
+           AltoY = MetodoY(Int16.Parse(txtAlto.ReadLine()));
+           MedioX =MetodoX(Int16.Parse(txtMedio.ReadLine()));
+           MedioY =MetodoY(Int16.Parse(txtMedio.ReadLine()));
+           BajoX = MetodoX(Int16.Parse(txtBajo.ReadLine()));
+           BajoY = MetodoY(Int16.Parse(txtBajo.ReadLine()));
 
            Alto.setPosition(new Vector2(AltoX, AltoY));
            Medio.setPosition(new Vector2(MedioX, MedioY));
            Bajo.setPosition(new Vector2(BajoX, BajoY));
-
-
-            
-
-            
 
 //            coso = "";
 
@@ -280,21 +254,15 @@ namespace Restaurant_Agent
 
            // base.Update(gameTime);
         }
-    public int MetodoX(char x, char x2)
+    public int MetodoX(int numero)
     {
-        int X;
-        if ((int)Char.GetNumericValue(x) == 1)
-                X = ((int)Char.GetNumericValue(x2) + 10) * 64 - 64;
-            else
-                X = (int)Char.GetNumericValue(x2)*64-64;
-        return X;
-
+        return (numero - 1) * 64;
     }
 
-    public int MetodoY(char y)
+    public int MetodoY(int y)
     {
         int Y;
-        Y = traduceY[(int)Char.GetNumericValue(y) - 1];
+        Y = traduceY[y - 1];
         return Y;
     }
 
