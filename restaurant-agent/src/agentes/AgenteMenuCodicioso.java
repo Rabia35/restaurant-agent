@@ -16,7 +16,7 @@ public class AgenteMenuCodicioso extends AgenteMenu
 	@Override
 	public void escogeRecetas() 
 	{	
-		String[][] recetas = Receta.obtenerRecetasCaras();
+		recetas = Receta.obtenerRecetasCaras();
 		String rFinal = "";
 		int t = 0;
 		

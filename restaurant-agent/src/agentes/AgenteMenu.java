@@ -18,6 +18,8 @@ public abstract class AgenteMenu extends Agent
 	public AID[] menus;
 	public AID administrador;	
 	protected Menu menu;
+	
+	protected String[][] recetas;
 
 	public void setup() 
 	{ 		
@@ -59,5 +61,13 @@ public abstract class AgenteMenu extends Agent
 	{
 		Debug.print(propuesta);
 		//Aqui añadir behaviour de negociación
+	}
+	
+	public String valorReceta(String receta)
+	{
+		for (int i = 0; i < recetas.length; i++)
+			if (recetas[i][0].equals(receta))
+				return recetas[i][1];
+		return "";
 	}
 }
