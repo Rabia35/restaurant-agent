@@ -22,6 +22,7 @@ public class BuscaAgentesParaAdministrador extends WakerBehaviour
 	protected void onWake() {
 		super.onWake();
 		miAgente.agentesMenu = AdministradorDF.encuentraAgentes(miAgente, "AgenteMenu");
+		miAgente.addBehaviour(new CambioDeMenu(miAgente));		
 		Debug.print("Agentes Menu agregados para Administrador"); //DEBUG
 	}
 }

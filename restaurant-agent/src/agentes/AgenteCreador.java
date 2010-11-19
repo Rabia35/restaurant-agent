@@ -22,12 +22,16 @@ public class AgenteCreador extends Agent
 			AgentController b1 = c.createNewAgent("AgenteBodegoNormal", "agentes.AgenteBodego",null);
 			AgentController b2 = c.createNewAgent("AgenteBodegoFuerte", "agentes.AgenteBodegoFuerte",null);
 			AgentController b3 = c.createNewAgent("AgenteBodegoAlto", "agentes.AgenteBodegoAlto",null);			
+			AgentController m1 = c.createNewAgent("AgenteMenuCodicioso", "agentes.AgenteMenuCodicioso",null);
+			AgentController m2 = c.createNewAgent("AgenteMenuSaludable", "agentes.AgenteMenuSaludable",null);
 			a.start();
 			p.start();
 			ch.start();
 			b1.start();
 			b2.start();
-			b3.start();			
+			b3.start();
+			m1.start();
+			m2.start();
 		} catch (StaleProxyException e) {
 			e.printStackTrace();
 		}		

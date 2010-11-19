@@ -1,11 +1,9 @@
 package agentes;
 
 import sql.Menu;
-import test.CreaPeticionesRandom;
 import util.AdministradorDF;
 import util.Debug;
 import comportamientos.BuscaAgentesParaAdministrador;
-import comportamientos.CambioDeMenu;
 import jade.core.AID;
 import jade.core.Agent;
 
@@ -24,9 +22,7 @@ public class AgenteAdministrador extends Agent
 	@Override
 	protected void setup() 
 	{		
-		//addBehaviour(new BuscaAgentesParaAdministrador(this));
-		//addBehaviour(new CambioDeMenu(this));
-		//addBehaviour(new CreaPeticionesRandom(this));
+		addBehaviour(new BuscaAgentesParaAdministrador(this));
 		AdministradorDF.daDeAlta(this, "AgenteAdministrador", "AgenteAdministrador");	
 		agentesMenu = null;
 		Debug.print("Administrador creado.");

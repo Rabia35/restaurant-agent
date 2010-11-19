@@ -47,7 +47,7 @@ public class AgenteBodego extends Agent {
 		setX(2);
 		setY(5 + tipo.ordinal());
 		AdministradorDF.daDeAlta(this, "AgenteBodego", "AgenteBodego"+tipo.name());
-		addBehaviour(new BuscaAgentesParaBodego(this));
+		//addBehaviour(new BuscaAgentesParaBodego(this));
 		Debug.print("Bodego "+tipo.name()+" creado.");
 	}
 	

@@ -27,10 +27,15 @@ public class RecibirPropuestasMenu extends MsgReceiver
 	@Override
 	protected void handleMessage(ACLMessage msg) 
 	{
-		if(msg != null)
-			descomponMensaje(msg.getContent());
+		if(msg == null)
+		{
+			miAgente.addBehaviour(new RecibirPropuestasMenu(miAgente, identificador));
+			return;
+		}
+			
+		descomponMensaje(msg.getContent());
 		
-		if (identificador < miAgente.totalAgentesMenu)
+		if (identificador < AgenteAdministrador.totalAgentesMenu)
 			esperaSiguiente();
 		else
 			evaluaPropuesta();
@@ -41,10 +46,11 @@ public class RecibirPropuestasMenu extends MsgReceiver
 		int max = 0;
 		int indice = 0;
 		int total = 0;
-		for (int k = 0; k < (miAgente.totalAgentesMenu * miAgente.totalAgentesMenu); k++)
+		int t = AgenteAdministrador.totalAgentesMenu;
+		for (int k = 0; k < t * t; k++)
 		{
 			total = 0;
-			for (int i = 0; i < miAgente.totalAgentesMenu; i++)		
+			for (int i = 0; i < t; i++)		
 				total += miAgente.valores[i][k];
 			if (total > max)
 			{

@@ -21,7 +21,7 @@ public class BuscaAgentesParaMenu extends WakerBehaviour
 	@Override
 	protected void onWake() {
 		super.onWake();
-		//miAgente.addBehaviour(new PidePlatillo(miAgente));
+		miAgente.addBehaviour(new EsperaCambioDeMenu(miAgente));
 		miAgente.menus = AdministradorDF.encuentraAgentes(miAgente, "AgenteMenu");
 		miAgente.administrador = AdministradorDF.encuentraAgentes(miAgente, "AgenteAdministrador")[0];
 		miAgente.quitaPropioAID();

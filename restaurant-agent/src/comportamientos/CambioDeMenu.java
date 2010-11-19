@@ -39,6 +39,8 @@ public class CambioDeMenu extends TickerBehaviour
 		miAgente.valores = new int[numAgentes][numAgentes*numAgentes];
 		
 		miAgente.addBehaviour(new RecibirPropuestasMenu(miAgente, 1));
-		this.stop();		
+		this.stop();
+		
+		miAgente.menu.quitaReceta(receta);
 	}
 }
