@@ -117,11 +117,13 @@ namespace Restaurant_Agent
                 pisos[i] = new Piso(Content.Load<Texture2D>("piso"));
             }
 
+            Texture2D caja = Content.Load<Texture2D>("caja32");
+
             llegada = new Llegada(Content.Load<Texture2D>("Llegada"));
             salida = new Salida(Content.Load<Texture2D>("Salida"));
-            Alto = new Bodego(Content.Load<Texture2D>("Alto"));
-            Medio = new Bodego(Content.Load<Texture2D>("Medio"));
-            Bajo = new Bodego(Content.Load<Texture2D>("Bajo"));
+            Alto = new Bodego(Content.Load<Texture2D>("Alto"), caja);
+            Medio = new Bodego(Content.Load<Texture2D>("Medio"), caja);
+            Bajo = new Bodego(Content.Load<Texture2D>("Bajo"), caja);
            // Alto = new AgenteBodego(this, ref textureAlto, "Alto");
 
             llegada.setPosition(new Vector2(0,0));
@@ -196,23 +198,38 @@ namespace Restaurant_Agent
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            /*
             if (gameTime.TotalGameTime.Seconds == elapsed.Seconds)
                 return;
             elapsed = gameTime.TotalGameTime;
-            */
-           
 
-            txtAlto = new StreamReader("D:\\Mis Documentos\\Tec\\Sistemas Multiagente\\restaurant-agent\\restaurant-agent\\Alto.txt");
-            txtMedio = new StreamReader("D:\\Mis Documentos\\Tec\\Sistemas Multiagente\\restaurant-agent\\restaurant-agent\\Normal.txt");
-            txtBajo = new StreamReader("D:\\Mis Documentos\\Tec\\Sistemas Multiagente\\restaurant-agent\\restaurant-agent\\Fuerte.txt");
 
+            try
+            {
+
+                txtAlto = new StreamReader("D:\\Mis Documentos\\Tec\\Sistemas Multiagente\\restaurant-agent\\restaurant-agent\\Alto.txt");
+                txtMedio = new StreamReader("D:\\Mis Documentos\\Tec\\Sistemas Multiagente\\restaurant-agent\\restaurant-agent\\Normal.txt");
+                txtBajo = new StreamReader("D:\\Mis Documentos\\Tec\\Sistemas Multiagente\\restaurant-agent\\restaurant-agent\\Fuerte.txt");
+            }
+            catch (Exception)
+            {
+                txtAlto.Close();
+                txtBajo.Close();
+                txtMedio.Close();
+                return;
+            }
            AltoX = MetodoX(Int16.Parse(txtAlto.ReadLine()));
            AltoY = MetodoY(Int16.Parse(txtAlto.ReadLine()));
+           Alto.ingrediente = txtAlto.ReadLine();
            MedioX =MetodoX(Int16.Parse(txtMedio.ReadLine()));
            MedioY =MetodoY(Int16.Parse(txtMedio.ReadLine()));
+           Medio.ingrediente = txtMedio.ReadLine();
            BajoX = MetodoX(Int16.Parse(txtBajo.ReadLine()));
            BajoY = MetodoY(Int16.Parse(txtBajo.ReadLine()));
+           Bajo.ingrediente = txtBajo.ReadLine();
+
+           txtAlto.Close();
+           txtBajo.Close();
+           txtMedio.Close();
 
            Alto.setPosition(new Vector2(AltoX, AltoY));
            Medio.setPosition(new Vector2(MedioX, MedioY));
@@ -287,9 +304,19 @@ namespace Restaurant_Agent
 
             spriteBatch.Draw(llegada.getImage(), llegada.getPosition(), Color.White);
             spriteBatch.Draw(salida.getImage(), salida.getPosition(), Color.White);
+
+
             spriteBatch.Draw(Alto.getImage(), Alto.getPosition(), Color.White);
             spriteBatch.Draw(Medio.getImage(), Medio.getPosition(), Color.White);
             spriteBatch.Draw(Bajo.getImage(), Bajo.getPosition(), Color.White);
+
+            if(Alto.ingrediente != null && Alto.ingrediente.Length > 0)
+                spriteBatch.Draw(Alto.caja, Alto.getPosition(), Color.White);
+            if (Medio.ingrediente != null && Medio.ingrediente.Length > 0)
+                spriteBatch.Draw(Medio.caja, Medio.getPosition(), Color.White);
+            if (Bajo.ingrediente != null && Bajo.ingrediente.Length > 0)
+                spriteBatch.Draw(Bajo.caja, Bajo.getPosition(), Color.White);
+            
           //  base.Draw(gameTime);
             /*
             spriteBatch.DrawString(font, "X: " + X.ToString(), posX, Color.White);

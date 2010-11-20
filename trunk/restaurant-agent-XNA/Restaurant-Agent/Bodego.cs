@@ -11,17 +11,23 @@ namespace Restaurant_Agent
     {
         protected Texture2D texture;
 
+        public Texture2D caja;
+
         public Vector2 position { get; set; }
 
         public const int BodegoH = 64;
         public const int BodegoW = 64;
         private Vector2 movimiento;
-        
 
-        public Bodego(Texture2D theTexture)
+        public string ingrediente;
+
+
+        public Bodego(Texture2D theTexture, Texture2D caja)
         {
                 texture = theTexture;
                 movimiento = new Vector2(64.0f, 64.0f);
+
+                this.caja = caja;
         }
 
         public void setPosition(Vector2 pos) 
