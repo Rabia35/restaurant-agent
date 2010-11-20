@@ -33,7 +33,7 @@ public class PidePlatillo extends TickerBehaviour
 			Random r = new Random();
 		
 			if (r.nextInt(10) < probabilidadPedir)
-				;//pideReceta();
+				pideReceta();
 		}
 		
 	}

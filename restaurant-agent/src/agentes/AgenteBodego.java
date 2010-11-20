@@ -67,11 +67,9 @@ public class AgenteBodego extends Agent {
 			wr.println(x);
 			wr.println(y);
 			wr.println(cargando);
+			wr.close();
 		}catch(IOException e){
 			Debug.print("Problema al actualizar el archivo del agente "+tipo.name());
-		}
-		finally{
-			wr.close();
 		}
 	}
 

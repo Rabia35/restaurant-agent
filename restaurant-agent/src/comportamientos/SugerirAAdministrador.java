@@ -27,24 +27,26 @@ public class SugerirAAdministrador extends MsgReceiver {
 		super(a,MessageTemplate.MatchPerformative(Performativas.SUGERIR),System.currentTimeMillis() + tiempoDeEspera,null,null);
 		miAgente=a;
 		rec=recibidos;
-		this.platillos = new ArrayList<String>(3+3*(recibidos+1));
-		String[] platillos = propuesta.split("#",3*(recibidos+1));
+		this.platillos = new ArrayList<String>();
+		String[] platillos = propuesta.split("#");
 		for(String platillo: platillos){
-			this.platillos.add(platillo);
+			if(platillo!="")
+				this.platillos.add(platillo);
 		}
 	}
 	
 	protected void handleMessage(ACLMessage msg){
 		if(msg!=null){
-			String[] platillos = msg.getContent().split("#", 3);
+			String[] platillos = msg.getContent().split("#");
 			for(String platillo: platillos){
-				this.platillos.add(platillo);
+				if(platillo!="")
+					this.platillos.add(platillo);
 			}
-			if(this.platillos.size() == (miAgente.menus.length+1)*3){
+			rec++;
+			if(miAgente.menus.length==rec){
 				Mensaje.mandaMensaje(miAgente, Performativas.SUGERIR, miAgente.administrador, propuestaConValores());
 				miAgente.addBehaviour(new EsperaCambioDeMenu(miAgente));
 			}else{
-				rec++;
 				miAgente.addBehaviour( new SugerirAAdministrador(miAgente,propuesta(),rec));	
 			}
 		}else{
