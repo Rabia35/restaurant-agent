@@ -33,11 +33,6 @@ public class CambioDeMenu extends TickerBehaviour
 		receta.resurtirReceta();
 		Mensaje.mandaMensaje(miAgente, Performativas.CAMBIAR, miAgente.agentesMenu, receta.clave);
 		
-		int numAgentes = AgenteAdministrador.totalAgentesMenu;
-		
-		miAgente.propuestas = new String[numAgentes][numAgentes*numAgentes];
-		miAgente.valores = new int[numAgentes][numAgentes*numAgentes];
-		
 		miAgente.addBehaviour(new RecibirPropuestasMenu(miAgente, 1));
 		this.stop();
 		

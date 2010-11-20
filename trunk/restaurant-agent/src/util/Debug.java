@@ -11,7 +11,9 @@ public class Debug
 	public static void print(String s)
 	{
 		if (depurando)
-			System.out.println(s);
+			synchronized(Debug.class){
+				System.out.println(s);
+			}
 	}
 	
 	public static void printMessage(ACLMessage msj){

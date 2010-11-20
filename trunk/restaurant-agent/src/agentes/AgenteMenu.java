@@ -35,7 +35,7 @@ public abstract class AgenteMenu extends Agent
 		AID[] nuevos = new AID[menus.length - 1];
 		AID miAID = getAID();
 		
-		for (int i = 0, j = 0; i < nuevos.length; i++)
+		for (int i = 0, j = 0; i < menus.length; i++)
 		{
 			if (menus[i].equals(miAID))
 				continue;
@@ -74,7 +74,7 @@ public abstract class AgenteMenu extends Agent
 		for (int i = 0; i < recetas.length; i++)
 			if(!estaEnMenu(recetas[i][0]))
 			{
-				rFinal += recetas[i][0] + "#" + recetas[i][1] + "#";
+				rFinal += recetas[i][0] + "#";
 				t++;
 				if (t == PROPUESTAS_POR_MENU)
 					break;

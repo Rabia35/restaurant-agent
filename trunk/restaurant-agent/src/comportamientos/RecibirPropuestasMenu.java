@@ -43,24 +43,23 @@ public class RecibirPropuestasMenu extends MsgReceiver
 	
 	private void evaluaPropuesta() 
 	{		
-		int max = 0;
-		int indice = 0;
-		int total = 0;
-		int t = AgenteAdministrador.totalAgentesMenu;
-		for (int k = 0; k < t * t; k++)
+		String mejor = "";
+		int maximo = 0;
+		
+		for (String llave : miAgente.map.keySet())
 		{
-			total = 0;
-			for (int i = 0; i < t; i++)		
-				total += miAgente.valores[i][k];
-			if (total > max)
+			int t = miAgente.map.get(llave);
+			if (t > maximo)
 			{
-				max = total;
-				indice = k;
+				maximo = t;
+				mejor = llave;
 			}			
 		}
-		String s = miAgente.propuestas[0][indice];
-		miAgente.menu.agregaReceta(Receta.obtenerReceta(s));
-		Debug.print("Nueva receta en el menu: " + s + " con un beneficio de " + total); //DEBUG
+		
+		miAgente.menu.agregaReceta(Receta.obtenerReceta(mejor));
+		miAgente.map.clear();
+		Debug.print("Nueva receta en el menu: " + mejor + " con un beneficio de " + maximo); //DEBUG
+		
 	}
 
 	private void descomponMensaje(String contenido) 
@@ -68,8 +67,8 @@ public class RecibirPropuestasMenu extends MsgReceiver
 		String splitted[] = contenido.split("#");
 		for (int i = 0; i < splitted.length; i += 2)
 		{
-			miAgente.propuestas[identificador - 1][i / 2] = splitted[i];
-			miAgente.valores[identificador - 1][i / 2] = Integer.parseInt(splitted[i + 1]);			
+			miAgente.añadeReceta( splitted[i] ,
+			                    (int) Math.floor(Double.parseDouble(splitted[i + 1])));			
 		}
 		Debug.print("Propuesta #" + identificador + " recibida."); //DEBUG
 	}

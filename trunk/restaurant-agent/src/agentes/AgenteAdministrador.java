@@ -1,5 +1,7 @@
 package agentes;
 
+import java.util.TreeMap;
+
 import sql.Menu;
 import util.AdministradorDF;
 import util.Debug;
@@ -16,16 +18,26 @@ public class AgenteAdministrador extends Agent
 	public Menu menu;
 	public AID[] agentesMenu;
 	
-	public String[][] propuestas;
-	public int[][] valores;
+	public TreeMap<String, Integer> map;
 	
 	@Override
 	protected void setup() 
 	{		
-		//addBehaviour(new CreaPeticionesRandom(this));
+		map = new TreeMap<String, Integer>();
 		addBehaviour(new BuscaAgentesParaAdministrador(this));
 		AdministradorDF.daDeAlta(this, "AgenteAdministrador", "AgenteAdministrador");	
 		agentesMenu = null;
 		Debug.print("Administrador creado.");
 	}	
+	
+	public void añadeReceta(String receta, int valor)
+	{
+		synchronized(AgenteAdministrador.class)
+		{
+			if (map.containsKey(receta))
+				map.put(receta, valor + map.get(receta));
+			else
+				map.put(receta, valor);
+		}
+	}
 }
