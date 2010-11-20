@@ -12,7 +12,7 @@ import jade.core.behaviours.TickerBehaviour;
 public class PidePlatillo extends TickerBehaviour 
 {
 	private static final long serialVersionUID = 3325363131790539744L;
-	private static final long TIEMPO_ESPERA = 5000L;
+	private static final long TIEMPO_ESPERA = 10000L;
 	
 	private static final long probabilidadPedir = 3; //de 10;
 	
@@ -33,7 +33,7 @@ public class PidePlatillo extends TickerBehaviour
 			Random r = new Random();
 		
 			if (r.nextInt(10) < probabilidadPedir)
-				pideReceta();
+				;//pideReceta();
 		}
 		
 	}

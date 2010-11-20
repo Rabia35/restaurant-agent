@@ -61,14 +61,17 @@ public class AgenteBodego extends Agent {
 		actualizarArchivoDeAgente();
 	}
 	public void actualizarArchivoDeAgente(){
+		PrintWriter wr = null;
 		try{
-			PrintWriter wr = new PrintWriter(tipo.name()+".txt");
+			wr = new PrintWriter(tipo.name()+".txt");
 			wr.println(x);
 			wr.println(y);
 			wr.println(cargando);
-			wr.close();
 		}catch(IOException e){
 			Debug.print("Problema al actualizar el archivo del agente "+tipo.name());
+		}
+		finally{
+			wr.close();
 		}
 	}
 

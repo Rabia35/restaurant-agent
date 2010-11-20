@@ -27,8 +27,8 @@ public class ContratarBodego extends MsgReceiver{
 			myAgent.addBehaviour(new ContratarBodego(miAgente,id,2000L));
 		}else{
 			Mensaje.mandaMensaje(id,miAgente, Performativas.CONFIRMAR, msg.getSender(), miAgente.ingredientePorAcomodar.clave); 
-			miAgente.ingredientePorAcomodar=null;
 			actualizarColumnas(msg.getSender());
+			miAgente.ingredientePorAcomodar=null;
 		}
 	}
 	
