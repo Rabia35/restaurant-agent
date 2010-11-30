@@ -18,18 +18,17 @@ public class PidePlatillo extends TickerBehaviour
 	
 	private AgenteChef chef;	
 
-	public PidePlatillo(AgenteChef a) {
+	public PidePlatillo(AgenteChef a) 
+	{
 		super(a, TIEMPO_ESPERA);
 		chef = a;
-	}
-
-	
+	}	
 	
 	@Override
 	protected void onTick() 
-	{
-		
-		if(chef.menu.recetas.length>0){
+	{		
+		if(chef.menu.recetas.length>0)
+		{
 			Random r = new Random();
 		
 			if (r.nextInt(10) < probabilidadPedir)
@@ -46,14 +45,23 @@ public class PidePlatillo extends TickerBehaviour
 		
 		int cual = r.nextInt(chef.menu.recetas.length);
 		
-		pideIngredientes(chef.menu.recetas[cual]);
+		int valor = chef.menu.recetas[cual].valorDeServirReceta();
+		
+		if (valor > 0)
+			pideIngredientes(chef.menu.recetas[cual], valor);
 	}
 	
-	private void pideIngredientes(Receta cual)
+	private void pideIngredientes(Receta cual, int valorReceta)
 	{
-		Pedido.agregarPlatillo(cual);
+		Pedido.agregarPlatillo(cual, valorReceta);
+		String str = "";
 		
-		for (int i = 0; i < cual.ingredientes.length; i++)
+		for (int i = 0; i < cual.ingredientes.length; i++)			
+		{
 			chef.negociaIngrediente(cual.ingredientes[i], cual.cantidadIngrediente[i]);
+			str += cual.ingredientes[i].nombre + "\n";
+		}
+		
+		chef.escribeArchivo(str);
 	}
 }

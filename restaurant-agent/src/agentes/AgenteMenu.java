@@ -1,9 +1,13 @@
 package agentes;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+
 import comportamientos.BuscaAgentesParaMenu;
 import comportamientos.SugerirAMenus;
 
 import sql.Menu;
+import sql.Receta;
 import util.AdministradorDF;
 import util.Debug;
 import util.TipoMenu;
@@ -67,6 +71,7 @@ public abstract class AgenteMenu extends Agent
 	public void procesaRecetas()
 	{
 		String rFinal = "";
+		String mensaje = "";
 		int t = 0;
 		
 		cargaMenu();
@@ -75,11 +80,13 @@ public abstract class AgenteMenu extends Agent
 			if(!estaEnMenu(recetas[i][0]))
 			{
 				rFinal += recetas[i][0] + "#";
+				mensaje += Receta.obtenerReceta(recetas[i][0]).nombre + "\n";
 				t++;
 				if (t == PROPUESTAS_POR_MENU)
 					break;
 			}
 		
+		escribeArchivo(mensaje);
 		negociaMenu(rFinal);
 	}
 	
@@ -89,5 +96,20 @@ public abstract class AgenteMenu extends Agent
 			if (recetas[i][0].equals(receta))
 				return recetas[i][1];
 		return "0";
+	}
+	
+	private void escribeArchivo(String contenido)
+	{
+		PrintWriter wr = null;
+		try
+		{
+			wr = new PrintWriter(tipo.name() + ".txt");
+			wr.println(contenido);
+			wr.close();
+			
+		}catch(IOException e)
+		{
+			Debug.print("Problema al actualizar el archivo del agente " + tipo.name());
+		}	
 	}
 }

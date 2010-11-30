@@ -1,5 +1,8 @@
 package agentes;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+
 import sql.Ingrediente;
 import sql.Menu;
 import util.AdministradorDF;
@@ -13,8 +16,8 @@ import comportamientos.ChefContrataBodego;
 import jade.core.AID;
 import jade.core.Agent;
 
-public class AgenteChef extends Agent{
-
+public class AgenteChef extends Agent
+{
 	private static final long serialVersionUID = 3109891387777615419L;
 	public AID[] agentesBodegos;
 	
@@ -22,7 +25,8 @@ public class AgenteChef extends Agent{
 	
 	public int idConversacion = 0;
 	
-	protected void setup(){		
+	protected void setup()
+	{		
 		menu = Menu.obtenerMenu();		
 		addBehaviour(new BuscaAgentesParaChef(this));		
 		AdministradorDF.daDeAlta(this, "AgenteChef", "AgenteChef");	
@@ -39,7 +43,21 @@ public class AgenteChef extends Agent{
 	{
 		Mensaje.mandaMensaje(id, this, Performativas.TRAER, 
 				agentesBodegos, ing.clave + "#" + cuantos);
-		addBehaviour(new ChefContrataBodego(this, id, ing, cuantos, intentos + 1));		
+		addBehaviour(new ChefContrataBodego(this, id, ing, cuantos, intentos + 1));
 	}
 	
+	public void escribeArchivo(String contenido)
+	{
+		PrintWriter wr = null;
+		try
+		{
+			wr = new PrintWriter("Chef.txt");
+			wr.println(contenido);
+			wr.close();
+			
+		}catch(IOException e)
+		{
+			Debug.print("Problema al actualizar el archivo del agente chef.");
+		}	
+	}	
 }
