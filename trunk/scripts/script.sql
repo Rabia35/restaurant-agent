@@ -55,3 +55,6 @@ create table pedido(
    receta char(5),
    tiempoPedido datetime);
 
+-- NUEVO!!
+alter table pedido add (valorReceta int, procesado int);
+

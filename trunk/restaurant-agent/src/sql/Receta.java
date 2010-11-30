@@ -10,6 +10,10 @@ public class Receta
 	
 	private static int CONSTANTE_SALUDABLE = 20;
 	private static int CONSTANTE_CADUCA = 60;
+	private static int INGREDIENTES_PRINCIPALES = 2;
+	
+	public static int VALOR_RECETA_COMPLETA = 100;
+	public static int CASTIGO_INGREDIENTE_FALTANTE = 30;
 	
 	public String clave;
 	public String nombre;
@@ -63,10 +67,24 @@ public class Receta
 	
 	public Ingrediente ingredienteFaltante()
 	{
-		for (int i = 0; i < ingredientes.length; i++)
+		for (int i = 0; i < INGREDIENTES_PRINCIPALES; i++)
 			if (!ingredientes[i].hayEnAlmacenSuficientes(cantidadIngrediente[i]))
 				return ingredientes[i];
 		return null;
+	}
+	
+	public int valorDeServirReceta()
+	{
+		int valor = VALOR_RECETA_COMPLETA;
+		
+		if (ingredienteFaltante() != null)
+			return 0;
+		
+		for (int i = INGREDIENTES_PRINCIPALES; i < ingredientes.length; i++)
+			if (!ingredientes[i].hayEnAlmacenSuficientes(cantidadIngrediente[i]))
+				valor -= CASTIGO_INGREDIENTE_FALTANTE;
+		
+		return valor;
 	}
 	
 	public void resurtirReceta()

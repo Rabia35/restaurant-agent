@@ -13,6 +13,9 @@ public class RecibirPropuestasMenu extends MsgReceiver
 	private static final long serialVersionUID = -5556717967302499627L;
 	private static final long tiempoDeEspera = 2000L;
 	
+	private static final int LIMITE_PRUDENTE = 50;
+	private static final int LIMITE_SELECCION_PRUDENTE = 70;
+	
 	private int identificador;
 	private AgenteAdministrador miAgente;
 	
@@ -33,7 +36,7 @@ public class RecibirPropuestasMenu extends MsgReceiver
 			return;
 		}
 			
-		descomponMensaje(msg.getContent());
+		descomponMensaje(msg.getContent(), msg.getSender().getLocalName().equals("AgenteMenuPrudente"));
 		
 		if (identificador < AgenteAdministrador.totalAgentesMenu)
 			esperaSiguiente();
@@ -62,13 +65,19 @@ public class RecibirPropuestasMenu extends MsgReceiver
 		
 	}
 
-	private void descomponMensaje(String contenido) 
+	private void descomponMensaje(String contenido, boolean esPrudente) 
 	{
 		String splitted[] = contenido.split("#");
 		for (int i = 0; i < splitted.length; i += 2)
 		{
-			miAgente.añadeReceta( splitted[i] ,
-			                    (int) Math.floor(Double.parseDouble(splitted[i + 1])));			
+			int valor = (int) Math.floor(Double.parseDouble(splitted[i + 1]));
+			
+			if (esPrudente && valor >= LIMITE_PRUDENTE)
+				valor += valor;
+			if (esPrudente && valor >= LIMITE_SELECCION_PRUDENTE)
+				valor *= valor;
+			
+			miAgente.añadeReceta( splitted[i], valor);			
 		}
 		Debug.print("Propuesta #" + identificador + " recibida."); //DEBUG
 	}

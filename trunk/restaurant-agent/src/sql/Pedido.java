@@ -6,9 +6,12 @@ import util.*;
 
 public class Pedido 
 {
-	public static Receta[] obtenerPlatillos(int cuantos, int aPartirDeCuantos)
+	public Receta receta;
+	public int valorReceta;
+	
+	public static Pedido[] obtenerPlatillos()
 	{
-		Receta platillos[] = new Receta[cuantos];
+		Pedido pedidos[] = null;
 		
 		try
 		{
@@ -16,23 +19,29 @@ public class Pedido
 			
 			bd.conectar();
 			
-			ResultSet rs = bd.realizarQuery("select * from pedido order by tiempoPedido desc");						
+			ResultSet rs = bd.realizarQuery(
+					" select * from pedido " +
+					" where procesado = 0 " +
+					" order by tiempoPedido desc");
 			
-			int i;
-			for(i = 0; i < aPartirDeCuantos; i++)
-				if(!rs.next())
-					break;
+			if (!rs.next())
+				return null;
 			
-			if(i == aPartirDeCuantos)
+			rs.last();
+			int cuantos = rs.getRow();
+			rs.beforeFirst();			
+			
+			pedidos = new Pedido[cuantos];
+				
+			for(int j = 0; j < cuantos; j++)
 			{
-				int j;
-				for(j = 0; j < cuantos; j++)
-				{
-					platillos[j] = Receta.obtenerReceta(rs.getString("receta"));
-					if(!rs.next())
-						break;
-				}					
-			}
+				rs.next();
+				pedidos[j] = new Pedido();
+				pedidos[j].valorReceta = rs.getInt("valorReceta");
+				pedidos[j].receta = Receta.obtenerReceta(rs.getString("receta"));				
+			}			
+				
+			bd.realizarQuery("update pedido set procesado = 1");
 				 			
 			bd.desconectar();
 		}catch(Exception e)
@@ -40,13 +49,14 @@ public class Pedido
 			e.printStackTrace();
 		}
 		
-		return platillos;
+		return pedidos;
 	}
 
-	public static void agregarPlatillo(Receta rec)
+	public static void agregarPlatillo(Receta rec, int valorReceta)
 	{		
 		BaseDeDatos bd = new BaseDeDatos();				
-		bd.ejectuarDML(" insert into pedido (receta, tiempoPedido) values (" + NoSQLInjection.comillas(rec.clave) + ", now())");
+		bd.ejectuarDML(" insert into pedido (receta, tiempoPedido, valorReceta) values (" + 
+				NoSQLInjection.comillas(rec.clave) + ", now()" + valorReceta + ")");
 	}
 	
 }

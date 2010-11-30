@@ -10,20 +10,21 @@ import util.Mensaje;
 import util.Performativas;
 import agentes.AgenteChef;
 
-public class ChefContrataBodego extends MsgReceiver{
-
+public class ChefContrataBodego extends MsgReceiver
+{
 	private static final long serialVersionUID = -1791386902205059086L;
-	private static final long TIEMPO_ESPERA = 2000L;
-	private static final int INTENTOS = 20;
+	private static final long TIEMPO_ESPERA = 10000L;
+	private static final int INTENTOS = 200;
 	
 	private int intento;
 	private Ingrediente ing;
 	private int cuantos;
-	String id;
+	private String id;
 
-	AgenteChef miAgente;	
+	public AgenteChef miAgente;	
 	
-	public ChefContrataBodego(AgenteChef a, String id, Ingrediente ing, int cuantos, int intento){
+	public ChefContrataBodego(AgenteChef a, String id, Ingrediente ing, int cuantos, int intento)
+	{
 		//Agent, MessageTemplate, deadline, DataStore, msgKey
 		super(a,MessageTemplate.MatchConversationId(id),System.currentTimeMillis() + TIEMPO_ESPERA,null,null);
 				
@@ -34,8 +35,10 @@ public class ChefContrataBodego extends MsgReceiver{
 		this.ing = ing;
 	}
 
-	protected void handleMessage(ACLMessage msg) {
-		if(msg==null){
+	protected void handleMessage(ACLMessage msg) 
+	{
+		if(msg==null)
+		{
 			if (intento <= INTENTOS)
 			{
 				miAgente.negociaIngrediente(ing, cuantos, id, intento);
@@ -44,7 +47,8 @@ public class ChefContrataBodego extends MsgReceiver{
 				miAgente.menu = Menu.obtenerMenu();
 				Debug.print("No se recibió ingrediente: " + ing.clave + " X " + cuantos);
 			}			
-		}else{
+		}else
+		{
 			Mensaje.mandaMensaje(id, miAgente, Performativas.CONFIRMAR, msg.getSender(), ing.clave + "#" + cuantos); 
 		}
 	}
