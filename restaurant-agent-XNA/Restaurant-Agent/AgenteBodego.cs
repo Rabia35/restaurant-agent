@@ -25,6 +25,7 @@ namespace Restaurant_Agent
         char charx, charx2, chary;
         int X, Y;
         int[] traduceY = { 384, 320, 256, 192, 128, 64, 0 };
+        private TimeSpan elapsed = new TimeSpan(0, 0, 0, 0, 0);
 
         public AgenteBodego(Game game, ref Texture2D theTexture,string nombreBodego):base (game)
         {
@@ -38,21 +39,23 @@ namespace Restaurant_Agent
 
         public override void Update(GameTime gameTime)
         {
-            tr = new StreamReader("C:/Users/Zeraal/Desktop/"+NombreBodego+".txt");
             
-            textoArchivo = tr.ReadToEnd();
 
+
+           /*
             charx = textoArchivo[0];
             charx2 = textoArchivo[1];
 
-            chary = textoArchivo[3];
-
+            chary = textoArchivo[3];  
+            
+          
             if ((int)Char.GetNumericValue(charx) == 1)
                 X = ((int)Char.GetNumericValue(charx2) + 10) * 64 - 64;
             else
                 X = (int)Char.GetNumericValue(charx2) * 64 - 64;
 
             Y = traduceY[(int)Char.GetNumericValue(chary) - 1];
+            */
 
             this.setPosition(new Vector2(X, Y));
 
@@ -61,25 +64,23 @@ namespace Restaurant_Agent
 
         public override void Draw(GameTime gameTime)
         {
-            
-
             sBatch.Draw(texture, position, Color.White);
             base.Draw(gameTime);
-
         }
 
         public void setPosition(Vector2 pos) 
         {
             position = pos;
         }
+
         public Vector2 getPosition() 
         {
             return position;
         }
+
         public Texture2D getImage()
         {
             return texture;
-        }
-        
+        }  
     }
 }

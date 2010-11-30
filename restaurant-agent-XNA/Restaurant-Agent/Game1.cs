@@ -26,10 +26,7 @@ namespace Restaurant_Agent
         Piso[] pisos;
         Llegada llegada;
         Salida salida;
-        Bodego Alto,Medio,Bajo;
-        int AltoX, AltoY, MedioX, MedioY, BajoX, BajoY;
-
-
+        Bodego Alto, Medio, Bajo;
         SpriteFont font;
 
        // private Texture2D textureAlto;
@@ -37,31 +34,17 @@ namespace Restaurant_Agent
 
         Vector2 posX = new Vector2(200.0f, 450.0f);
         Vector2 posY = new Vector2(300.0f, 450.0f);
-        Vector2 poscoso = new Vector2(400.0f, 450.0f);
+        Vector2 postxt = new Vector2(400.0f, 450.0f);
 
        // int  X;
-        TextReader txtAlto,txtMedio,txtBajo;
+        TextReader txtAlto,txtMedio,txtBajo, txtProveedor;
        // int  Y;
         int[] traduceY = {384,320,256,192,128,64,0};
 
-
-        char Altocharx,Altochar2x,Altochary,
-             Mediocharx, Mediochar2x,Mediochary,
-             Bajocharx, Bajochar2x, Bajochary;
-        
-        string AltoCaja, MedioCaja, BajoCaja;
-        string textAlto,textBajo,textMedio;
-
         int numEstantesTotal = 48;
         int numPisoTotal = 111;
-        int sumaNumEstantes = 0;
-        int sumaNumPiso = 0;
-        int numEstantes = 12;
-        int estLargo = 3;
-        int estAlto = 4;
-        private Texture2D estanteTexture;
 
-        private KeyboardState teclado;
+//        private KeyboardState teclado;
 
         private TimeSpan elapsed = new TimeSpan(0,0,0,0,0);
 
@@ -117,70 +100,24 @@ namespace Restaurant_Agent
                 pisos[i] = new Piso(Content.Load<Texture2D>("piso"));
             }
 
-            Texture2D caja = Content.Load<Texture2D>("caja32");
+            Texture2D cajaAgente = Content.Load<Texture2D>("caja32");
+            Texture2D cajaLlegada = Content.Load<Texture2D>("Caja42");
 
-            llegada = new Llegada(Content.Load<Texture2D>("Llegada"));
+            llegada = new Llegada(Content.Load<Texture2D>("Llegada"), cajaLlegada);
             salida = new Salida(Content.Load<Texture2D>("Salida"));
-            Alto = new Bodego(Content.Load<Texture2D>("Alto"), caja);
-            Medio = new Bodego(Content.Load<Texture2D>("Medio"), caja);
-            Bajo = new Bodego(Content.Load<Texture2D>("Bajo"), caja);
-           // Alto = new AgenteBodego(this, ref textureAlto, "Alto");
+            Alto = new Bodego(Content.Load<Texture2D>("Alto"), cajaAgente);
+            Medio = new Bodego(Content.Load<Texture2D>("Medio"), cajaAgente);
+            Bajo = new Bodego(Content.Load<Texture2D>("Bajo"), cajaAgente);
 
             llegada.setPosition(new Vector2(0,0));
             salida.setPosition(new Vector2(1152, 0));
-
-           // bodego.setPosition(new Vector2(64, 64));
             
-            DibujaPiso();
-
-            DibujaEstantes(0, 192);
-            DibujaEstantes(384, 192);
-            DibujaEstantes(768, 192);
-            DibujaEstantes(1152, 192);
-
+            pisos= Utilidades.DibujaPiso(pisos);
+            estantes = Utilidades.DibujaEstantes(estantes);
 
             // TODO: use this.Content to load your game content here
         }
 
-        public void DibujaEstantes(int sumaX,int sumaY)
-        {
-            for (int i = 0; i < estLargo; i++)
-            {
-                for (int j = 0; j < estAlto; j++)
-                {
-                    estantes[sumaNumEstantes].setPosition(new Vector2(i * Estante.ESTANTEWIDTH + sumaX, j * Estante.ESTANTEHEIGHT + sumaY));
-                    sumaNumEstantes++;
-                }
-            }
-
-        }
-        public void DibujaPiso() 
-        {
-            for(int i=0;i<17;i++)
-            {
-                for (int j = 0; j < 3; j++)
-                {
-                    pisos[sumaNumPiso].setPosition(new Vector2(i * Piso.PISOWH + 64, j * Piso.PISOWH));
-                    sumaNumPiso++;
-                }
-            }
-
-            DibujaPisoPasillo(64,192);
-            DibujaPisoPasillo(448, 192);
-            DibujaPisoPasillo(832, 192);
-        }
-
-        public void DibujaPisoPasillo(int sumX,int sumY)
-        {
-            for (int i = 0; i < 5; i++)
-            {
-                for (int j = 0; j < 4; j++)
-                {
-                    pisos[sumaNumPiso].setPosition(new Vector2(i * Piso.PISOWH + sumX , j * Piso.PISOWH + sumY ));
-                    sumaNumPiso++;
-                }
-            }
-        }
 
         /// <summary>
         /// UnloadContent will be called once per game and is the place to unload
@@ -206,54 +143,58 @@ namespace Restaurant_Agent
             try
             {
 
-                txtAlto = new StreamReader("D:\\Mis Documentos\\Tec\\Sistemas Multiagente\\restaurant-agent\\restaurant-agent\\Alto.txt");
-                txtMedio = new StreamReader("D:\\Mis Documentos\\Tec\\Sistemas Multiagente\\restaurant-agent\\restaurant-agent\\Normal.txt");
-                txtBajo = new StreamReader("D:\\Mis Documentos\\Tec\\Sistemas Multiagente\\restaurant-agent\\restaurant-agent\\Fuerte.txt");
+                txtAlto = new StreamReader(
+                    "C:\\Users\\Zeraal\\Desktop\\Alto.txt");
+                    //"D:\\Mis Documentos\\Tec\\Sistemas Multiagente\\restaurant-agent\\restaurant-agent\\Alto.txt");
+                txtMedio = new StreamReader(
+                    "C:\\Users\\Zeraal\\Desktop\\Medio.txt");
+                    //"D:\\Mis Documentos\\Tec\\Sistemas Multiagente\\restaurant-agent\\restaurant-agent\\Normal.txt");
+                txtBajo = new StreamReader(
+                    "C:\\Users\\Zeraal\\Desktop\\Bajo.txt");
+                    //"D:\\Mis Documentos\\Tec\\Sistemas Multiagente\\restaurant-agent\\restaurant-agent\\Fuerte.txt");
+                txtProveedor = new StreamReader(
+                    "C:\\Users\\Zeraal\\Desktop\\Proveedor.txt");
+                    //"D:\\Mis Documentos\\Tec\\Sistemas Multiagente\\restaurant-agent\\restaurant-agent\\Proveedor.txt");
             }
             catch (Exception)
             {
                 txtAlto.Close();
                 txtBajo.Close();
                 txtMedio.Close();
+                txtProveedor.Close();
                 return;
             }
-           AltoX = MetodoX(Int16.Parse(txtAlto.ReadLine()));
-           AltoY = MetodoY(Int16.Parse(txtAlto.ReadLine()));
+            
+           Alto.setPosition(new Vector2(
+                Utilidades.TraducePosicionX(Int16.Parse(txtAlto.ReadLine())),
+                Utilidades.TraducePosicionY(Int16.Parse(txtAlto.ReadLine()))));
            Alto.ingrediente = txtAlto.ReadLine();
-           MedioX =MetodoX(Int16.Parse(txtMedio.ReadLine()));
-           MedioY =MetodoY(Int16.Parse(txtMedio.ReadLine()));
-           Medio.ingrediente = txtMedio.ReadLine();
-           BajoX = MetodoX(Int16.Parse(txtBajo.ReadLine()));
-           BajoY = MetodoY(Int16.Parse(txtBajo.ReadLine()));
-           Bajo.ingrediente = txtBajo.ReadLine();
-
            txtAlto.Close();
-           txtBajo.Close();
+
+           Medio.setPosition(new Vector2(
+               Utilidades.TraducePosicionX(Int16.Parse(txtMedio.ReadLine())),
+               Utilidades.TraducePosicionY(Int16.Parse(txtMedio.ReadLine()))));
+           Medio.ingrediente = txtMedio.ReadLine();
            txtMedio.Close();
 
-           Alto.setPosition(new Vector2(AltoX, AltoY));
-           Medio.setPosition(new Vector2(MedioX, MedioY));
-           Bajo.setPosition(new Vector2(BajoX, BajoY));
+           Bajo.setPosition(new Vector2(
+               Utilidades.TraducePosicionX(Int16.Parse(txtBajo.ReadLine())),
+               Utilidades.TraducePosicionY(Int16.Parse(txtBajo.ReadLine()))));
+           Bajo.ingrediente = txtBajo.ReadLine();
+           txtBajo.Close();
 
-//            coso = "";
-
-            //32 es enter
-/*
-            for(int i = 5; i < prueba.Length; i++)
-            {
-                coso += prueba[i];
-            }
-*/
-                // close the stream
-                
-
-            
+           llegada.paquete1 = txtProveedor.ReadLine();
+           llegada.paquete2 = txtProveedor.ReadLine();
+           llegada.paquete3 = txtProveedor.ReadLine();
+           txtProveedor.Close();
 
 
 
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
+
+            #region teclado (not in use)
 
             /*
             teclado = Keyboard.GetState();
@@ -267,22 +208,13 @@ namespace Restaurant_Agent
             if (teclado.IsKeyDown(Keys.Right))
                 bodego.position += new Vector2(+64, 0);
               */
+            #endregion
+
             // TODO: Add your update logic here
 
            // base.Update(gameTime);
         }
-    public int MetodoX(int numero)
-    {
-        return (numero - 1) * 64;
-    }
-
-    public int MetodoY(int y)
-    {
-        int Y;
-        Y = traduceY[y - 1];
-        return Y;
-    }
-
+ 
         /// <summary>
         /// This is called when the game should draw itself.
         /// </summary>
@@ -316,16 +248,20 @@ namespace Restaurant_Agent
                 spriteBatch.Draw(Medio.caja, Medio.getPosition(), Color.White);
             if (Bajo.ingrediente != null && Bajo.ingrediente.Length > 0)
                 spriteBatch.Draw(Bajo.caja, Bajo.getPosition(), Color.White);
+
+            if (llegada.paquete1 != null && llegada.paquete1.CompareTo("0") != 0)
+                spriteBatch.Draw(llegada.caja, llegada.getPosition(), Color.White);
+            if (llegada.paquete2 != null && llegada.paquete2.CompareTo("0") != 0)
+                spriteBatch.Draw(llegada.caja,new Vector2(llegada.getPosition().X,llegada.getPosition().Y+64), Color.White);
+            if (llegada.paquete3 != null && llegada.paquete3.CompareTo("0")!= 0 )
+                spriteBatch.Draw(llegada.caja, new Vector2(llegada.getPosition().X, llegada.getPosition().Y + 128), Color.White);
             
           //  base.Draw(gameTime);
             /*
             spriteBatch.DrawString(font, "X: " + X.ToString(), posX, Color.White);
             spriteBatch.DrawString(font, "Y: " + Y.ToString(), posY, Color.White);
-            spriteBatch.DrawString(font, "Coso: " + coso, poscoso, Color.White);
+            spriteBatch.DrawString(font, "Coso: " + coso, postxt, Color.White);
 */
-
-
-
             spriteBatch.End();
             base.Draw(gameTime);
         }

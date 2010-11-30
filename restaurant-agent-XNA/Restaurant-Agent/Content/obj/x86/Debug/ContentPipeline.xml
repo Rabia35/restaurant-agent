@@ -7,8 +7,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\Mis Documentos\Tec\Sistemas Multiagente\restaurant-agent\restaurant-agent-XNA\Restaurant-Agent\bin\x86\Debug\Content\Estante.xnb</Output>
-      <Time>2010-11-19T14:04:43.3242187-06:00</Time>
+      <Output>C:\Users\Zeraal\Documents\Visual Studio 2008\Projects\Restaurant-Agent XNA\Restaurant-Agent\bin\x86\Debug\Content\Estante.xnb</Output>
+      <Time>2010-11-19T18:37:57.9423274-06:00</Time>
     </Item>
     <Item>
       <Source>piso.png</Source>
@@ -16,8 +16,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\Mis Documentos\Tec\Sistemas Multiagente\restaurant-agent\restaurant-agent-XNA\Restaurant-Agent\bin\x86\Debug\Content\piso.xnb</Output>
-      <Time>2010-11-19T14:04:43.3476562-06:00</Time>
+      <Output>C:\Users\Zeraal\Documents\Visual Studio 2008\Projects\Restaurant-Agent XNA\Restaurant-Agent\bin\x86\Debug\Content\piso.xnb</Output>
+      <Time>2010-11-19T18:37:58.0323326-06:00</Time>
     </Item>
     <Item>
       <Source>Llegada.png</Source>
@@ -25,8 +25,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\Mis Documentos\Tec\Sistemas Multiagente\restaurant-agent\restaurant-agent-XNA\Restaurant-Agent\bin\x86\Debug\Content\Llegada.xnb</Output>
-      <Time>2010-11-19T14:04:43.3398437-06:00</Time>
+      <Output>C:\Users\Zeraal\Documents\Visual Studio 2008\Projects\Restaurant-Agent XNA\Restaurant-Agent\bin\x86\Debug\Content\Llegada.xnb</Output>
+      <Time>2010-11-19T18:37:57.9933303-06:00</Time>
     </Item>
     <Item>
       <Source>Salida.png</Source>
@@ -34,8 +34,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\Mis Documentos\Tec\Sistemas Multiagente\restaurant-agent\restaurant-agent-XNA\Restaurant-Agent\bin\x86\Debug\Content\Salida.xnb</Output>
-      <Time>2010-11-19T14:04:43.2705078-06:00</Time>
+      <Output>C:\Users\Zeraal\Documents\Visual Studio 2008\Projects\Restaurant-Agent XNA\Restaurant-Agent\bin\x86\Debug\Content\Salida.xnb</Output>
+      <Time>2010-11-19T18:37:57.655311-06:00</Time>
     </Item>
     <Item>
       <Source>Bodego.png</Source>
@@ -43,8 +43,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\Mis Documentos\Tec\Sistemas Multiagente\restaurant-agent\restaurant-agent-XNA\Restaurant-Agent\bin\x86\Debug\Content\Bodego.xnb</Output>
-      <Time>2010-11-19T14:04:43.2822265-06:00</Time>
+      <Output>C:\Users\Zeraal\Documents\Visual Studio 2008\Projects\Restaurant-Agent XNA\Restaurant-Agent\bin\x86\Debug\Content\Bodego.xnb</Output>
+      <Time>2010-11-19T18:37:57.6863128-06:00</Time>
     </Item>
     <Item>
       <Source>Bajo.png</Source>
@@ -52,8 +52,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\Mis Documentos\Tec\Sistemas Multiagente\restaurant-agent\restaurant-agent-XNA\Restaurant-Agent\bin\x86\Debug\Content\Bajo.xnb</Output>
-      <Time>2010-11-19T14:04:43.3544922-06:00</Time>
+      <Output>C:\Users\Zeraal\Documents\Visual Studio 2008\Projects\Restaurant-Agent XNA\Restaurant-Agent\bin\x86\Debug\Content\Bajo.xnb</Output>
+      <Time>2010-11-19T18:37:58.0603342-06:00</Time>
     </Item>
     <Item>
       <Source>caja21.png</Source>
@@ -61,8 +61,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\Mis Documentos\Tec\Sistemas Multiagente\restaurant-agent\restaurant-agent-XNA\Restaurant-Agent\bin\x86\Debug\Content\caja21.xnb</Output>
-      <Time>2010-11-19T14:04:43.3085937-06:00</Time>
+      <Output>C:\Users\Zeraal\Documents\Visual Studio 2008\Projects\Restaurant-Agent XNA\Restaurant-Agent\bin\x86\Debug\Content\caja21.xnb</Output>
+      <Time>2010-11-19T18:37:57.8813239-06:00</Time>
     </Item>
     <Item>
       <Source>caja32.png</Source>
@@ -70,8 +70,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\Mis Documentos\Tec\Sistemas Multiagente\restaurant-agent\restaurant-agent-XNA\Restaurant-Agent\bin\x86\Debug\Content\caja32.xnb</Output>
-      <Time>2010-11-19T14:04:43.3164062-06:00</Time>
+      <Output>C:\Users\Zeraal\Documents\Visual Studio 2008\Projects\Restaurant-Agent XNA\Restaurant-Agent\bin\x86\Debug\Content\caja32.xnb</Output>
+      <Time>2010-11-19T18:37:57.9163259-06:00</Time>
     </Item>
     <Item>
       <Source>caja42.png</Source>
@@ -79,8 +79,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\Mis Documentos\Tec\Sistemas Multiagente\restaurant-agent\restaurant-agent-XNA\Restaurant-Agent\bin\x86\Debug\Content\caja42.xnb</Output>
-      <Time>2010-11-19T14:04:43.3320312-06:00</Time>
+      <Output>C:\Users\Zeraal\Documents\Visual Studio 2008\Projects\Restaurant-Agent XNA\Restaurant-Agent\bin\x86\Debug\Content\caja42.xnb</Output>
+      <Time>2010-11-19T18:37:57.9683289-06:00</Time>
     </Item>
     <Item>
       <Source>Medio.png</Source>
@@ -88,8 +88,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\Mis Documentos\Tec\Sistemas Multiagente\restaurant-agent\restaurant-agent-XNA\Restaurant-Agent\bin\x86\Debug\Content\Medio.xnb</Output>
-      <Time>2010-11-19T14:04:43.2597656-06:00</Time>
+      <Output>C:\Users\Zeraal\Documents\Visual Studio 2008\Projects\Restaurant-Agent XNA\Restaurant-Agent\bin\x86\Debug\Content\Medio.xnb</Output>
+      <Time>2010-11-19T18:37:57.6253093-06:00</Time>
     </Item>
     <Item>
       <Source>Alto.png</Source>
@@ -97,8 +97,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\Mis Documentos\Tec\Sistemas Multiagente\restaurant-agent\restaurant-agent-XNA\Restaurant-Agent\bin\x86\Debug\Content\Alto.xnb</Output>
-      <Time>2010-11-19T14:04:43.2988281-06:00</Time>
+      <Output>C:\Users\Zeraal\Documents\Visual Studio 2008\Projects\Restaurant-Agent XNA\Restaurant-Agent\bin\x86\Debug\Content\Alto.xnb</Output>
+      <Time>2010-11-19T18:37:57.8243207-06:00</Time>
     </Item>
     <Item>
       <Source>font.spritefont</Source>
@@ -106,18 +106,18 @@
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\Mis Documentos\Tec\Sistemas Multiagente\restaurant-agent\restaurant-agent-XNA\Restaurant-Agent\bin\x86\Debug\Content\font.xnb</Output>
-      <Time>2010-11-19T14:04:43.290039-06:00</Time>
+      <Output>C:\Users\Zeraal\Documents\Visual Studio 2008\Projects\Restaurant-Agent XNA\Restaurant-Agent\bin\x86\Debug\Content\font.xnb</Output>
+      <Time>2010-11-19T18:37:57.795319-06:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>D:\Mis Documentos\Tec\Sistemas Multiagente\restaurant-agent\restaurant-agent-XNA\Restaurant-Agent\Content\</RootDirectory>
-      <LoggerRootDirectory>D:\Mis Documentos\Tec\Sistemas Multiagente\restaurant-agent\restaurant-agent-XNA\Restaurant-Agent\</LoggerRootDirectory>
-      <IntermediateDirectory>D:\Mis Documentos\Tec\Sistemas Multiagente\restaurant-agent\restaurant-agent-XNA\Restaurant-Agent\Content\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>D:\Mis Documentos\Tec\Sistemas Multiagente\restaurant-agent\restaurant-agent-XNA\Restaurant-Agent\bin\x86\Debug\Content\</OutputDirectory>
+      <RootDirectory>C:\Users\Zeraal\Documents\Visual Studio 2008\Projects\Restaurant-Agent XNA\Restaurant-Agent\Content\</RootDirectory>
+      <LoggerRootDirectory>C:\Users\Zeraal\Documents\Visual Studio 2008\Projects\Restaurant-Agent XNA\Restaurant-Agent\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\Users\Zeraal\Documents\Visual Studio 2008\Projects\Restaurant-Agent XNA\Restaurant-Agent\Content\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\Users\Zeraal\Documents\Visual Studio 2008\Projects\Restaurant-Agent XNA\Restaurant-Agent\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>
@@ -142,7 +142,7 @@
       </Assembly>
       <Assembly>
         <Key>C:\Windows\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\3.0.0.0__6d5c3888ef60e27d\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
-        <Value>2010-08-24T00:18:51.7988281-05:00</Value>
+        <Value>2010-08-23T13:13:23.1560727-05:00</Value>
       </Assembly>
     </Assemblies>
   </Asset>
