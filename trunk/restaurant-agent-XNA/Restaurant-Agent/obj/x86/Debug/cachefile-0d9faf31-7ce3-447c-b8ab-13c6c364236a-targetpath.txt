@@ -10,3 +10,6 @@ Content\caja42.xnb
 Content\Medio.xnb
 Content\Alto.xnb
 Content\font.xnb
+Content\chef.xnb
+Content\globo.xnb
+Content\menu.xnb

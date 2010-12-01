@@ -14,6 +14,9 @@ namespace Restaurant_Agent
         protected Vector2 position;
         public const int LLEGADAH = 192;
         public const int LLEGADAW = 64;
+        public int cajaw = 42;
+
+        public const float stringPosY = 450.0f;
 
         public string paquete1, paquete2, paquete3;
         

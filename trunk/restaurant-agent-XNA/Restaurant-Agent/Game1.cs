@@ -27,17 +27,20 @@ namespace Restaurant_Agent
         Llegada llegada;
         Salida salida;
         Bodego Alto, Medio, Bajo;
+        Chef awesomeChef;
+        Menu codicioso, saludable, prudente;
         SpriteFont font;
+        string rutaBarbie = "D:\\Mis Documentos\\Tec\\Sistemas Multiagente\\restaurant-agent\\restaurant-agent\\";
+        string rutaMetal = "C:\\Users\\Zeraal\\Desktop\\";
 
-       // private Texture2D textureAlto;
-       // private AgenteBodego Alto;
-
-        Vector2 posX = new Vector2(200.0f, 450.0f);
-        Vector2 posY = new Vector2(300.0f, 450.0f);
+        Vector2 posX = new Vector2(00.0f, 450.0f);
+        Vector2 posY = new Vector2(00.0f, 470.0f);
         Vector2 postxt = new Vector2(400.0f, 450.0f);
 
+  
+
        // int  X;
-        TextReader txtAlto,txtMedio,txtBajo, txtProveedor;
+        TextReader txtAlto,txtMedio,txtBajo, txtProveedor, txtChef,txtCodicioso, txtSaludable, txtPrudente;
        // int  Y;
         int[] traduceY = {384,320,256,192,128,64,0};
 
@@ -51,7 +54,7 @@ namespace Restaurant_Agent
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
-            graphics.PreferredBackBufferHeight = 448 + 50;
+            graphics.PreferredBackBufferHeight = 448 + 115+23;
             graphics.PreferredBackBufferWidth = 1216;
 
             Content.RootDirectory = "Content";
@@ -66,7 +69,6 @@ namespace Restaurant_Agent
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
             base.Initialize();
         }
 
@@ -102,12 +104,19 @@ namespace Restaurant_Agent
 
             Texture2D cajaAgente = Content.Load<Texture2D>("caja32");
             Texture2D cajaLlegada = Content.Load<Texture2D>("Caja42");
+            Texture2D globo = Content.Load<Texture2D>("globo");
 
             llegada = new Llegada(Content.Load<Texture2D>("Llegada"), cajaLlegada);
             salida = new Salida(Content.Load<Texture2D>("Salida"));
             Alto = new Bodego(Content.Load<Texture2D>("Alto"), cajaAgente);
             Medio = new Bodego(Content.Load<Texture2D>("Medio"), cajaAgente);
             Bajo = new Bodego(Content.Load<Texture2D>("Bajo"), cajaAgente);
+
+            awesomeChef = new Chef(Content.Load<Texture2D>("Chef"), globo, "Chef");
+
+            codicioso = new Menu(Content.Load<Texture2D>("menu"),codicioso, "Codicioso");
+            prudente = new Menu(Content.Load<Texture2D>("menu"),prudente,"Prudente");
+            saludable = new Menu(Content.Load<Texture2D>("menu"),saludable,"Saludabe");
 
             llegada.setPosition(new Vector2(0,0));
             salida.setPosition(new Vector2(1152, 0));
@@ -138,23 +147,63 @@ namespace Restaurant_Agent
             if (gameTime.TotalGameTime.Seconds == elapsed.Seconds)
                 return;
             elapsed = gameTime.TotalGameTime;
+           
+            if (awesomeChef.visible)
+            {
+                awesomeChef.tiempoActual++;
+                if (awesomeChef.tiempoDeVida <= awesomeChef.tiempoActual)
+                    awesomeChef.visible = false;
+            }
 
+            if (codicioso.visible) 
+            {
+                codicioso.tiempoActual++;
+                if (codicioso.tiempoDeVida <= codicioso.tiempoActual)
+                    codicioso.visible = false;
+            }
+            if (prudente.visible)
+            {
+                prudente.tiempoActual++;
+                if (prudente.tiempoDeVida <= prudente.tiempoActual)
+                    prudente.visible = false;
+            }
+            if (saludable.visible)
+            {
+                saludable.tiempoActual++;
+                if (saludable.tiempoDeVida <= saludable.tiempoActual)
+                    saludable.visible = false;
+            }
+                       
 
             try
             {
-
                 txtAlto = new StreamReader(
-                    "C:\\Users\\Zeraal\\Desktop\\Alto.txt");
-                    //"D:\\Mis Documentos\\Tec\\Sistemas Multiagente\\restaurant-agent\\restaurant-agent\\Alto.txt");
+                    rutaMetal+"Alto.txt");
+
+                //rutaBarbie+"Alto.txt");
                 txtMedio = new StreamReader(
-                    "C:\\Users\\Zeraal\\Desktop\\Medio.txt");
-                    //"D:\\Mis Documentos\\Tec\\Sistemas Multiagente\\restaurant-agent\\restaurant-agent\\Normal.txt");
+                    rutaMetal + "Medio.txt");
+                //rutaBarbie+"Normal.txt");
                 txtBajo = new StreamReader(
-                    "C:\\Users\\Zeraal\\Desktop\\Bajo.txt");
-                    //"D:\\Mis Documentos\\Tec\\Sistemas Multiagente\\restaurant-agent\\restaurant-agent\\Fuerte.txt");
+                    rutaMetal + "Bajo.txt");
+                //rutaBarbie+"Fuerte.txt");
                 txtProveedor = new StreamReader(
-                    "C:\\Users\\Zeraal\\Desktop\\Proveedor.txt");
-                    //"D:\\Mis Documentos\\Tec\\Sistemas Multiagente\\restaurant-agent\\restaurant-agent\\Proveedor.txt");
+                    rutaMetal + "Proveedor.txt");
+                //rutaBarbie+"Proveedor.txt");
+                txtChef = new StreamReader(
+                    rutaMetal+awesomeChef.nombre+".txt");
+                //rutaBarbie+"Chef.txt");
+                
+                txtCodicioso = new StreamReader(
+                    rutaMetal + "MenuCodicioso.txt");
+                //rutaBarbie+"MenuCodicioso.txt");
+                txtPrudente = new StreamReader(
+                    rutaMetal + "MenuPrudente.txt");
+                //rutaBarbie+"MenuPrudente.txt");
+                txtSaludable =new StreamReader(
+                    rutaMetal + "MenuSaludable.txt");
+                //rutaBarbie+"MenuSaludable.txt");
+                
             }
             catch (Exception)
             {
@@ -162,6 +211,10 @@ namespace Restaurant_Agent
                 txtBajo.Close();
                 txtMedio.Close();
                 txtProveedor.Close();
+                txtChef.Close();
+                txtCodicioso.Close();
+                txtPrudente.Close();
+                txtSaludable.Close();
                 return;
             }
             
@@ -187,6 +240,60 @@ namespace Restaurant_Agent
            llegada.paquete2 = txtProveedor.ReadLine();
            llegada.paquete3 = txtProveedor.ReadLine();
            txtProveedor.Close();
+
+           awesomeChef.temp = txtChef.ReadLine();
+
+           if (awesomeChef.temp != null && awesomeChef.temp.Length > 0)
+           {
+               awesomeChef.ingrediente1 = awesomeChef.temp;
+               awesomeChef.ingrediente2 = txtChef.ReadLine();
+               awesomeChef.ingrediente3 = txtChef.ReadLine();
+               awesomeChef.ingrediente4 = txtChef.ReadLine();
+               awesomeChef.visible = true;
+               awesomeChef.tiempoActual = 0;
+           }
+           txtChef.Close();
+
+           (new StreamWriter(rutaMetal + awesomeChef.nombre+".txt")).Close();
+
+           codicioso.temp = txtCodicioso.ReadLine();
+           if (codicioso.temp != null && codicioso.temp.Length > 0)
+           {
+               codicioso.ingrediente1 = codicioso.temp;
+               codicioso.ingrediente2 = txtCodicioso.ReadLine();
+               codicioso.ingrediente3 = txtCodicioso.ReadLine();
+               codicioso.visible = true;
+               codicioso.tiempoActual = 0;
+           }
+           txtCodicioso.Close();
+           (new StreamWriter(rutaMetal + "MenuCodicioso.txt")).Close();
+
+            saludable.temp = txtSaludable.ReadLine();
+           if (saludable.temp != null && saludable.temp.Length > 0)
+           {
+           saludable.ingrediente1 = saludable.temp;
+           saludable.ingrediente2 = txtSaludable.ReadLine();
+           saludable.ingrediente3 = txtSaludable.ReadLine();
+           saludable.visible = true;
+           saludable.tiempoActual = 0;
+           }
+           txtSaludable.Close();
+           (new StreamWriter(rutaMetal + "MenuSaludable.txt")).Close();
+
+           prudente.temp = txtPrudente.ReadLine();
+            if (prudente.temp != null && prudente.temp.Length > 0)
+           {
+           prudente.ingrediente1 = prudente.temp;
+           prudente.ingrediente2 = txtPrudente.ReadLine();
+           prudente.ingrediente3 = txtPrudente.ReadLine();
+
+           prudente.visible = true;
+           prudente.tiempoActual = 0;
+           }
+            txtPrudente.Close();
+            (new StreamWriter(rutaMetal + "MenuPrudente.txt")).Close();
+
+
 
 
 
@@ -242,6 +349,17 @@ namespace Restaurant_Agent
             spriteBatch.Draw(Medio.getImage(), Medio.getPosition(), Color.White);
             spriteBatch.Draw(Bajo.getImage(), Bajo.getPosition(), Color.White);
 
+            spriteBatch.Draw(awesomeChef.getImage(), awesomeChef.getPosition(), Color.White);
+
+            if (awesomeChef.visible)
+            {
+                spriteBatch.Draw(awesomeChef.globo, new Vector2(awesomeChef.getPosition().X + awesomeChef.chefW,
+                    awesomeChef.getPosition().Y), Color.White);
+                spriteBatch.DrawString(font, awesomeChef.ingrediente1 + "\n" +awesomeChef.ingrediente2 +
+                                        "\n" + awesomeChef.ingrediente3 + "\n" + awesomeChef.ingrediente4 , 
+                                        new Vector2(awesomeChef.getPosition().X + awesomeChef.chefW+40, awesomeChef.getPosition().Y+10), Color.Black);
+            }
+               
             if(Alto.ingrediente != null && Alto.ingrediente.Length > 0)
                 spriteBatch.Draw(Alto.caja, Alto.getPosition(), Color.White);
             if (Medio.ingrediente != null && Medio.ingrediente.Length > 0)
@@ -250,20 +368,55 @@ namespace Restaurant_Agent
                 spriteBatch.Draw(Bajo.caja, Bajo.getPosition(), Color.White);
 
             if (llegada.paquete1 != null && llegada.paquete1.CompareTo("0") != 0)
+            {
                 spriteBatch.Draw(llegada.caja, llegada.getPosition(), Color.White);
+                spriteBatch.DrawString(font, llegada.paquete1, new Vector2(llegada.getPosition().X, llegada.getPosition().Y + llegada.cajaw), Color.White);
+            }
             if (llegada.paquete2 != null && llegada.paquete2.CompareTo("0") != 0)
-                spriteBatch.Draw(llegada.caja,new Vector2(llegada.getPosition().X,llegada.getPosition().Y+64), Color.White);
-            if (llegada.paquete3 != null && llegada.paquete3.CompareTo("0")!= 0 )
-                spriteBatch.Draw(llegada.caja, new Vector2(llegada.getPosition().X, llegada.getPosition().Y + 128), Color.White);
+            {
+                float posY = llegada.getPosition().Y + 64;
+                spriteBatch.Draw(llegada.caja, new Vector2(llegada.getPosition().X, posY), Color.White);
+                spriteBatch.DrawString(font, llegada.paquete2, new Vector2(llegada.getPosition().X, posY + llegada.cajaw), Color.White);
+            }
+
+            if (llegada.paquete3 != null && llegada.paquete3.CompareTo("0") != 0)
+            {
+                float posY = llegada.getPosition().Y + 128;
+                spriteBatch.Draw(llegada.caja, new Vector2(llegada.getPosition().X, posY), Color.White);
+                spriteBatch.DrawString(font, llegada.paquete3, new Vector2(llegada.getPosition().X, posY + llegada.cajaw), Color.White);
+            }
+
+            if (codicioso.visible)
+            {
+                float posX = codicioso.getPosition().X;
+                spriteBatch.Draw(codicioso.getImage(), new Vector2(posX, codicioso.getPosition().Y), Color.White);
+                spriteBatch.DrawString(font, "Menu codicioso:\n"+
+                codicioso.ingrediente1+"\n"+codicioso.ingrediente2+"\n"+codicioso.ingrediente3,new Vector2(posX+10,codicioso.getPosition().Y+10), Color.Black);
+            }
+            if (saludable.visible)
+            {
+                float posX = saludable.getPosition().X + saludable.menuW;
+                spriteBatch.Draw(saludable.getImage(), new Vector2(posX, saludable.getPosition().Y), Color.White);
+                spriteBatch.DrawString(font, "Menu Saludable:\n" +
+                saludable.ingrediente1 + "\n" + saludable.ingrediente2 + "\n" + saludable.ingrediente3, new Vector2(posX + 10, saludable.getPosition().Y + 10), Color.Black);
+            }
+            if (prudente.visible)
+            {
+                float posX = prudente.getPosition().X + prudente.menuW * 2;
+                spriteBatch.Draw(prudente.getImage(), new Vector2(posX, prudente.getPosition().Y), Color.White);
+                spriteBatch.DrawString(font, "Menu Prudente:\n" +
+                prudente.ingrediente1 + "\n" + prudente.ingrediente2 + "\n" + prudente.ingrediente3, new Vector2(posX + 10, prudente.getPosition().Y + 10), Color.Black);
+            }
+
+
+
+
             
           //  base.Draw(gameTime);
-            /*
-            spriteBatch.DrawString(font, "X: " + X.ToString(), posX, Color.White);
-            spriteBatch.DrawString(font, "Y: " + Y.ToString(), posY, Color.White);
-            spriteBatch.DrawString(font, "Coso: " + coso, postxt, Color.White);
-*/
+            
             spriteBatch.End();
             base.Draw(gameTime);
+           
         }
     }
 }

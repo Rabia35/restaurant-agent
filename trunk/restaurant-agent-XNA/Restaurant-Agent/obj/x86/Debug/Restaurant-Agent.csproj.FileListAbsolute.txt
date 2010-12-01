@@ -52,3 +52,6 @@ C:\Users\Zeraal\Documents\Visual Studio 2008\Projects\Restaurant-Agent XNA\Resta
 C:\Users\Zeraal\Documents\Visual Studio 2008\Projects\Restaurant-Agent XNA\Restaurant-Agent\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
 C:\Users\Zeraal\Documents\Visual Studio 2008\Projects\Restaurant-Agent XNA\Restaurant-Agent\obj\x86\Debug\Restaurant-Agent.exe
 C:\Users\Zeraal\Documents\Visual Studio 2008\Projects\Restaurant-Agent XNA\Restaurant-Agent\obj\x86\Debug\Restaurant-Agent.pdb
+C:\Users\Zeraal\Documents\Visual Studio 2008\Projects\Restaurant-Agent XNA\Restaurant-Agent\bin\x86\Debug\Content\chef.xnb
+C:\Users\Zeraal\Documents\Visual Studio 2008\Projects\Restaurant-Agent XNA\Restaurant-Agent\bin\x86\Debug\Content\globo.xnb
+C:\Users\Zeraal\Documents\Visual Studio 2008\Projects\Restaurant-Agent XNA\Restaurant-Agent\bin\x86\Debug\Content\menu.xnb
