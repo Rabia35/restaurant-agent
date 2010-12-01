@@ -20,9 +20,9 @@ namespace Restaurant_Agent
        // private Vector2 movimiento;
         protected SpriteBatch sBatch;
         public string NombreBodego;
-        TextReader tr;
-        string textoArchivo;
-        char charx, charx2, chary;
+        //TextReader tr;
+        //string textoArchivo;
+        //char charx, charx2, chary;
         int X, Y;
         int[] traduceY = { 384, 320, 256, 192, 128, 64, 0 };
         private TimeSpan elapsed = new TimeSpan(0, 0, 0, 0, 0);

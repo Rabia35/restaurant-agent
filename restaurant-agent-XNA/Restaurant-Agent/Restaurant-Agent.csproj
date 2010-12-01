@@ -86,8 +86,10 @@
   <ItemGroup>
     <Compile Include="AgenteBodego.cs" />
     <Compile Include="Bodego.cs" />
+    <Compile Include="Chef.cs" />
     <Compile Include="Estante.cs" />
     <Compile Include="Llegada.cs" />
+    <Compile Include="Menu.cs" />
     <Compile Include="Piso.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />

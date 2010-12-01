@@ -15,7 +15,7 @@ namespace Restaurant_Agent
         private static int estAlto = 4;
         static int sumaNumEstantes = 0;
         static int sumaNumPiso = 0;
-        static int numPisoTotal = 111;
+        //static int numPisoTotal = 111;
 
         public static int TraducePosicionX(int numero)
         {
